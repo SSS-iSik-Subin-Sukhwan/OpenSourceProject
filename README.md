@@ -5,6 +5,7 @@
 # 주제 : 나만의 맛집 지도 Application
  - 자신이 다녀온 맛집을 지도에 표시하고 사진과 일기(소감)을 남길 수 있음
  
+- [깃허브 사용법 정리](https://github.com/2019androidtp/gitArrange/blob/master/%EA%B9%83%ED%97%88%EB%B8%8C%20%EC%B4%9D%EC%A0%95%EB%A6%AC.pdf)
 
 
 ## 팀 구성

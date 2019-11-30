@@ -8,6 +8,17 @@ public class array_saving_class {
 
   public static int backFlag = 0;
 
+  // findeatingPlace용 변수
+  public static TMapPoint[] findalTMapPoint = new TMapPoint[100];
+  public static int findalTMapPoint_size = 0;
+
+  public static String[] findnameOfIt = new String[6];
+  public static int findnameOfIt_size = 0;
+
+  public static String[] findaddressOfIt = new String[6];
+  public static  int findaddressOfIt_size = 0;
+  //
+
   public static TMapPoint[] alTMapPoint = new TMapPoint[100]; // 찾은 주소의 좌표들을 저장해줄 TMapPoint 배열
   public static int alTMapPoint_size = 0; // alTMapPoint의 크기를 저장해주는 변수
 

@@ -8,13 +8,13 @@
     android:orientation="vertical">
 
     <ImageView
-        android:layout_gravity="left"
+        android:background="@color/orange"
         android:id="@+id/first"
         android:layout_width="wrap_content"
-        android:layout_height="150dp"
+        android:layout_height="131dp"
+        android:layout_gravity="left"
 
-        android:src="@drawable/mainframe"
-       />
+        android:src="@drawable/mainFrame" />
 
 
     <LinearLayout

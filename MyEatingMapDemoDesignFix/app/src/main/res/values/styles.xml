@@ -1,12 +1,5 @@
 <resources>
 
-    <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-        <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
-    </style>
     <style name="buttonBarButtonStyle" parent="Widget.AppCompat.Button.Borderless.Colored">
     </style>
 
@@ -29,5 +22,100 @@
         <item name="buttonBarNeutralButtonStyle">@style/buttonBarButtonStyle.Neutral</item>
         <item name="buttonBarNegativeButtonStyle">@style/buttonBarButtonStyle.Negative</item>
         <item name="buttonBarPositiveButtonStyle">@style/buttonBarButtonStyle.Positive</item>
+    </style>
+
+    <style name="ButtonWhiteBig">
+        <item name="android:gravity">center</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:lineSpacingExtra">2sp</item>
+        <item name="android:textColor">#ffffff</item>
+    </style>
+
+    <style name="LocationStyle">
+        <item name="android:gravity">left</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:lineSpacingExtra">2sp</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="AddressStyle">
+        <item name="android:gravity">left</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:lineSpacingExtra">2sp</item>
+        <item name="android:textColor">@color/greyish</item>
+    </style>
+
+    <style name ="BlackTopWhite">
+
+        <item name="android:textSize">26sp</item>
+        <item name="android:lineSpacingExtra">2sp</item>
+        <item name="android:textColor">#ffffff</item>
+    </style>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/orange</item>
+        <item name="colorPrimaryDark">@color/black</item>
+        <item name="colorAccent">@color/orange</item>
+    </style>
+
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar"/>
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light"/>
+
+    <!-- font 에도 있는 style-->
+    <style name="ButtonWhite">
+        <item name="android:gravity">center</item>
+        <item name="android:textSize">13.3sp</item>
+        <item name="android:lineSpacingExtra">2sp</item>
+        <item name="android:textColor">#ffffff</item>
+    </style>
+
+    <style name="TextStyle5">
+        <item name="android:gravity">center_horizontal</item>
+        <item name="android:textSize">13.3sp</item>
+        <item name="android:lineSpacingExtra">2sp</item>
+        <item name="android:textColor">#ffffff</item>
+    </style>
+
+    <style name="Location">
+        <item name="android:textSize">12sp</item>
+        <item name="android:lineSpacingExtra">2sp</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="Search">
+        <item name="android:textSize">13.3sp</item>
+        <item name="android:lineSpacingExtra">1.3sp</item>
+        <item name="android:textColor">#303030</item>
+    </style>
+
+    <style name="SearchResult">
+        <item name="android:textSize">9.3sp</item>
+        <item name="android:lineSpacingExtra">1.3sp</item>
+        <item name="android:textColor">@color/warm_grey</item>
+    </style>
+
+    <style name="LocationAddress">
+        <item name="android:textSize">8sp</item>
+        <item name="android:lineSpacingExtra">1.3sp</item>
+        <item name="android:textColor">@color/greyish</item>
+    </style>
+    <style name="SearchResultUp">
+        <item name="android:textSize">14sp</item>
+        <item name="android:lineSpacingExtra">4sp</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="SearchResultDown">
+        <item name="android:textSize">12sp</item>
+        <item name="android:lineSpacingExtra">4sp</item>
+        <item name="android:textColor">@color/greyish</item>
     </style>
 </resources>

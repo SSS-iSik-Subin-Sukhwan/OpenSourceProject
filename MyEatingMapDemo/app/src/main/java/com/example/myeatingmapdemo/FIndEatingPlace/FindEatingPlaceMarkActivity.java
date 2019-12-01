@@ -4,12 +4,13 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.myeatingmapdemo.MainActivity;
 import com.example.myeatingmapdemo.MyEatingPlace.MyEatingPlaceMark;
@@ -22,6 +23,7 @@ import com.skt.Tmap.TMapView;
 
 import java.util.ArrayList;
 
+import static com.example.myeatingmapdemo.FIndEatingPlace.FindEatingPlaceResultViewActivity.foodListAdapter;
 import static com.example.myeatingmapdemo.Values.findEatingPlaceAddress;
 import static com.example.myeatingmapdemo.Values.findEatingPlaceName;
 import static com.example.myeatingmapdemo.Values.findEatingPlacePoint;
@@ -105,6 +107,7 @@ public class FindEatingPlaceMarkActivity extends AppCompatActivity {
             }
           }
         });
+
 
         Intent MemoIntent = new Intent(getApplicationContext(), FindEatingPlaceResultViewActivity.class);
         startActivity(MemoIntent);

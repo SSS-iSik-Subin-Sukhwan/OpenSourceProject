@@ -4,13 +4,14 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Handler;
 import android.os.Looper;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.myeatingmapdemo.FIndEatingPlace.FindEatingPlaceListViewActivity;
 import com.example.myeatingmapdemo.MyEatingPlace.MyEatingPlaceListViewActivity;
@@ -60,13 +61,13 @@ public class MainActivity extends AppCompatActivity {
     Button myEatingPlaceMemoBtn = (Button)findViewById(R.id.AddMyEatingPlaceBtn);
     Button findEatingPlaceBtn = (Button)findViewById(R.id.FindEatingPlaceBtn);
     Button findGroupPlaceBtn = (Button)findViewById(R.id.FindGroupPlaceBtn);
-    Button checkMyEatingPlaceBtn = (Button)findViewById(R.id.FindEatingPlaceBtn);
+    Button checkMyEatingPlaceBtn = (Button)findViewById(R.id.CheckMyEatingPlaceBtn);
 
     myEatingPlaceMemoBtn.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View v) {
 
-        findEatingPlaceAddress();
+       findEatingPlaceAddress();
 
       }
     });
@@ -98,18 +99,19 @@ public class MainActivity extends AppCompatActivity {
   }
 
   public void findEatingPlaceAddress(){
-    AlertDialog.Builder addressSearchBuilder = new AlertDialog.Builder(this, R.style.MyAlertDialogStyle);
-    addressSearchBuilder.setTitle("주소 검색");
 
-    final EditText userInput = new EditText(this); // EditText로 사용자에게서 받음
-    addressSearchBuilder.setView(userInput);
+    AlertDialog.Builder addressSearchBuilder1 = new AlertDialog.Builder(this, R.style.MyAlertDialogStyle);
+    addressSearchBuilder1.setTitle("주소 검색");
 
-    addressSearchBuilder.setPositiveButton("확인", new DialogInterface.OnClickListener() {
+     final EditText userInput = new EditText(this); // EditText로 사용자에게서 받음
+    addressSearchBuilder1.setView(userInput);
+
+    addressSearchBuilder1.setPositiveButton("확인", new DialogInterface.OnClickListener() {
 
       @Override
       public void onClick(DialogInterface dialog, int which) {
 
-        final String strData = userInput.getText().toString(); // EditText에서 받은 String값을 strData에 저장
+        String strData = userInput.getText().toString(); // EditText에서 받은 String값을 strData에 저장
 
         TMapData tmapData = new TMapData();
 
@@ -153,16 +155,17 @@ public class MainActivity extends AppCompatActivity {
 
     });
 
-    addressSearchBuilder.setNegativeButton("취소", new DialogInterface.OnClickListener() {
+    addressSearchBuilder1.setNegativeButton("취소", new DialogInterface.OnClickListener() {
       @Override
       public void onClick(DialogInterface dialog, int which) {
         dialog.cancel();
       }
     });
-    addressSearchBuilder.show();
+    addressSearchBuilder1.show();
 
 
   }
+
   public void findAddress() { // 주소 검색을 하는 메소드
 
     AlertDialog.Builder addressSearchBuilder = new AlertDialog.Builder(this, R.style.MyAlertDialogStyle);

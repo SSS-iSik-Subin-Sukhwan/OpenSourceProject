@@ -12,6 +12,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.myeatingmapdemo.FIndEatingPlace.FindEatingPlaceListViewActivity;
+import com.example.myeatingmapdemo.MyEatingPlace.MyEatingPlaceListViewActivity;
 import com.skt.Tmap.TMapData;
 import com.skt.Tmap.TMapPOIItem;
 import com.skt.Tmap.TMapView;
@@ -31,12 +33,19 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-  // 음식점 찾기용 변수
-  static int findPOIItemSize;
-  static String findPOIResult[] = new String[100];
-  static String findAddressResult[] = new String[100];
-  static double findPOILat[] = new double[100];
-  static double findPOILon[] = new double[100];
+  // myEatingPlace용 음식점 찾기 변수
+  public static int myEatingPlacePOIItemSize;
+  public static String[] myEatingPlaceFindPOIResult = new String[100];
+  public static String[] myEatingPlaceFindAddressResult = new String[100];
+  public static double[] myEatingPlaceFindPOILat = new double[100];
+  public static double myEatingPalceFindPOILon[] = new double[100];
+
+  // findEatingPlace용 음식점 찾기 변수
+  public static int findEatingPlacePOIItemSize;
+  public static String findEatingPlaceFindPOIResult[] = new String[100];
+  public static String findEatingPlaceFindAddressResult[] = new String[100];
+  public static double findEatingPlaceFindPOILat[] = new double[100];
+  public static double findEatingPalceFindPOILon[] = new double[100];
 
 
 
@@ -122,11 +131,11 @@ public class MainActivity extends AppCompatActivity {
 
                 TMapPOIItem item = poiItem.get(i);
 
-                findPOIResult[i] = item.getPOIName(); // POIResult[i]에 item에서 가져온 POI 이름을 저장
-                findAddressResult[i] = item.getPOIAddress().replace("null", ""); // AddressResult[i]에 item에서 가져온 POI 주소를 저장
-                findPOILat[i] = item.getPOIPoint().getLatitude(); // POI지점에 위도를 POILat[i]에 저장
-                findPOILon[i] = item.getPOIPoint().getLongitude(); // POI지점에 경도를 POILon[i]에 저장
-                findPOIItemSize = poiItem.size(); // poiItem값을 전해주기 위해 POIitemSize에 저장
+                myEatingPlaceFindPOIResult[i] = item.getPOIName(); // POIResult[i]에 item에서 가져온 POI 이름을 저장
+                myEatingPlaceFindAddressResult[i] = item.getPOIAddress().replace("null", ""); // AddressResult[i]에 item에서 가져온 POI 주소를 저장
+                myEatingPlaceFindPOILat[i] = item.getPOIPoint().getLatitude(); // POI지점에 위도를 POILat[i]에 저장
+                myEatingPalceFindPOILon[i] = item.getPOIPoint().getLongitude(); // POI지점에 경도를 POILon[i]에 저장
+                myEatingPlacePOIItemSize = poiItem.size(); // poiItem값을 전해주기 위해 POIitemSize에 저장
 
               }
 
@@ -189,16 +198,16 @@ public class MainActivity extends AppCompatActivity {
 
                 TMapPOIItem item = poiItem.get(i);
 
-                POIResult[i] = item.getPOIName(); // POIResult[i]에 item에서 가져온 POI 이름을 저장
-                AddressResult[i] = item.getPOIAddress().replace("null", ""); // AddressResult[i]에 item에서 가져온 POI 주소를 저장
-                POILat[i] = item.getPOIPoint().getLatitude(); // POI지점에 위도를 POILat[i]에 저장
-                POILon[i] = item.getPOIPoint().getLongitude(); // POI지점에 경도를 POILon[i]에 저장
-                POIitemSize = poiItem.size(); // poiItem값을 전해주기 위해 POIitemSize에 저장
+                findEatingPlaceFindPOIResult[i] = item.getPOIName(); // POIResult[i]에 item에서 가져온 POI 이름을 저장
+                findEatingPlaceFindAddressResult[i] = item.getPOIAddress().replace("null", ""); // AddressResult[i]에 item에서 가져온 POI 주소를 저장
+                findEatingPlaceFindPOILat[i] = item.getPOIPoint().getLatitude(); // POI지점에 위도를 POILat[i]에 저장
+                findEatingPalceFindPOILon[i] = item.getPOIPoint().getLongitude(); // POI지점에 경도를 POILon[i]에 저장
+                findEatingPlacePOIItemSize = poiItem.size(); // poiItem값을 전해주기 위해 POIitemSize에 저장
 
               }
 
 
-              Intent ListViewIntent = new Intent(getApplicationContext(), FindEatingPlaceActivity.class);
+              Intent ListViewIntent = new Intent(getApplicationContext(), FindEatingPlaceListViewActivity.class);
               startActivity(ListViewIntent); // 리스트뷰 띄우는 액티비티로 이동
 
             }

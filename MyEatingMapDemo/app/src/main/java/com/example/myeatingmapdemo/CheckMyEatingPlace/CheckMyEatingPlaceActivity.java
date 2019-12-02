@@ -9,10 +9,8 @@ import android.graphics.PointF;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.myeatingmapdemo.R;
 import com.skt.Tmap.TMapMarkerItem;
@@ -31,6 +29,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.example.myeatingmapdemo.array_saving_class.alTMapPoint;
 
 public class CheckMyEatingPlaceActivity extends AppCompatActivity {
   private static ArrayList<TMapPoint> userPointArr = new ArrayList<>();
@@ -38,12 +37,17 @@ public class CheckMyEatingPlaceActivity extends AppCompatActivity {
   private static ArrayList<String> userLatArr = new ArrayList<>();
   private static ArrayList<String> userLonArr = new ArrayList<>();
   static Bitmap markerImage;
+  static TextView memoTextView;
+  static TextView latTextView;
+  static TextView lonTextView;
+  private static String userTotalMemo = "";
+  private static String userTotalLat = "";
+  private static String userTotalLon = "";
+
   static int i = 0;
   String data;
   static TMapView tMapView;
-
-  boolean dataExist = false;
-
+  static ArrayList<TMapMarkerItem> markerItem= new ArrayList<>();
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -59,25 +63,23 @@ public class CheckMyEatingPlaceActivity extends AppCompatActivity {
     tMapView.setOnLongClickListenerCallback(new TMapView.OnLongClickListenerCallback() {
       @Override
       public void onLongPressEvent(ArrayList<TMapMarkerItem> arrayList, ArrayList<TMapPOIItem> arrayList1, TMapPoint tMapPoint) {
-
-
-
-
-        for(int i = 0; i< userMemoArr.size(); i++){
-          if(arrayList.get(0).getID().equals("markerItem" + i)){
-            data = userMemoArr.get(i);
-            dataExist = true;
+        for(int i = 0; i< userPointArr.size(); i++) {
+          if (("markerItem" + i ) == arrayList.get(i).getID()){
+              data = userMemoArr.get(i);
           }
+
+
+
+
         }
 
-        if(dataExist = true){
-          Intent memoIntent = new Intent(getApplicationContext(),popupActivity.class);
-          memoIntent.putExtra("data", data);
-          startActivity(memoIntent);
-        }
 
 
 
+
+        Intent memoIntent = new Intent(getApplicationContext(),popupActivity.class);
+        memoIntent.putExtra("data", data);
+        startActivity(memoIntent);
       }
     });
   }
@@ -166,14 +168,9 @@ public class CheckMyEatingPlaceActivity extends AppCompatActivity {
       markerItem.setTMapPoint(userPointArr.get(i));
       markerItem.setVisible(TMapMarkerItem.VISIBLE);
       //지도에 마커 추가
-
-
       tMapView.addMarkerItem("markerItem" + i, markerItem);
 
     }
     tMapView.setCenterPoint(userPointArr.get(0).getLongitude(), userPointArr.get(0).getLatitude());
   }
-
-
-
 }

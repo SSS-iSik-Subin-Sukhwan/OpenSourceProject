@@ -9,14 +9,17 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
-        android:supportsRtl="true"
-        android:theme="@style/AppTheme">
-        <activity android:name=".FIndEatingPlace.FindEatingPlaceResultViewActivity"/>
+        android:supportsRtl="false"
+        android:theme="@style/AppTheme.NoActionBar">
+
+        <activity android:name=".CheckMyEatingPlace.popupActivity" android:theme="@android:style/Theme.Dialog" />
+
+        <activity android:name=".CheckMyEatingPlace.CheckMyEatingPlaceActivity" />
+        <activity android:name=".FIndEatingPlace.FindEatingPlaceResultViewActivity" />
         <activity android:name=".MyEatingPlace.MyEatingPlaceMemoActivty" />
         <activity android:name=".MyEatingPlace.MyEatingPlaceMarkActivity" />
-        <activity android:name=".FIndEatingPlace.FindEatingPlaceMarkActivity"/>
+        <activity android:name=".FIndEatingPlace.FindEatingPlaceMarkActivity" />
         <activity android:name=".FIndEatingPlace.FindEatingPlaceListViewActivity" />
-        <activity android:name=".AddressMarkActivity" />
         <activity android:name=".MyEatingPlace.MyEatingPlaceListViewActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
@@ -29,7 +32,6 @@
         <meta-data
             android:name="com.kakao.sdk.AppKey"
             android:value="@string/kakao_app_key" />
-
     </application>
 
 </manifest>

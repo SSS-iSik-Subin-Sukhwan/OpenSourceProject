@@ -13,6 +13,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.myeatingmapdemo.CheckMyEatingPlace.CheckMyEatingPlaceActivity;
 import com.example.myeatingmapdemo.FIndEatingPlace.FindEatingPlaceListViewActivity;
 import com.example.myeatingmapdemo.MyEatingPlace.MyEatingPlaceListViewActivity;
 import com.skt.Tmap.TMapData;
@@ -60,7 +61,6 @@ public class MainActivity extends AppCompatActivity {
 
     Button myEatingPlaceMemoBtn = (Button)findViewById(R.id.AddMyEatingPlaceBtn);
     Button findEatingPlaceBtn = (Button)findViewById(R.id.FindEatingPlaceBtn);
-    Button findGroupPlaceBtn = (Button)findViewById(R.id.FindGroupPlaceBtn);
     Button checkMyEatingPlaceBtn = (Button)findViewById(R.id.CheckMyEatingPlaceBtn);
 
     myEatingPlaceMemoBtn.setOnClickListener(new View.OnClickListener() {
@@ -81,17 +81,13 @@ public class MainActivity extends AppCompatActivity {
       }
     });
 
-    findGroupPlaceBtn.setOnClickListener(new View.OnClickListener() {
-      @Override
-      public void onClick(View v) {
 
-      }
-    });
 
     checkMyEatingPlaceBtn.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View v) {
-
+         Intent checkMyEatingIntent = new Intent(getApplicationContext(), CheckMyEatingPlaceActivity.class);
+         startActivity(checkMyEatingIntent);
       }
     });
 

@@ -61,6 +61,7 @@ public class MainActivity extends AppCompatActivity {
 
     Button myEatingPlaceMemoBtn = (Button)findViewById(R.id.AddMyEatingPlaceBtn);
     Button findEatingPlaceBtn = (Button)findViewById(R.id.FindEatingPlaceBtn);
+    Button findGroupPlaceBtn = (Button)findViewById(R.id.FindGroupPlaceBtn);
     Button checkMyEatingPlaceBtn = (Button)findViewById(R.id.CheckMyEatingPlaceBtn);
 
     myEatingPlaceMemoBtn.setOnClickListener(new View.OnClickListener() {
@@ -81,7 +82,12 @@ public class MainActivity extends AppCompatActivity {
       }
     });
 
+    findGroupPlaceBtn.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View v) {
 
+      }
+    });
 
     checkMyEatingPlaceBtn.setOnClickListener(new View.OnClickListener() {
       @Override

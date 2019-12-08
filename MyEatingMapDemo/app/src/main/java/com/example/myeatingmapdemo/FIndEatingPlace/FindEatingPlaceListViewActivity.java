@@ -9,7 +9,6 @@ import android.widget.ListView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.myeatingmapdemo.ListViewAdapter;
-import com.example.myeatingmapdemo.MyEatingPlace.MyEatingPlaceMarkActivity;
 import com.example.myeatingmapdemo.R;
 import com.example.myeatingmapdemo.Values;
 import com.skt.Tmap.TMapPoint;

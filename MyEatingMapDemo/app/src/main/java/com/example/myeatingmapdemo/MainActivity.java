@@ -24,18 +24,8 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
-  // findAddress() 함수용 변수
-  static int POIitemSize;
-  static String POIResult[] = new String[100]; //POI의 이름을 담는 배열
-  static String AddressResult[] = new String[100]; //POI의 주소를 담는 배열
-  static double POILat[]= new double[100]; //POI의 Latitude를 담는 배열
-  static double POILon[]= new double[100]; //POI의 Longitude를 담는 배열
-  static int btnClickSize[] = new int[6]; // 배열의 인덱스에 해당하는 버튼을 눌러 값을 저장했었는지 체크하는 배열 ex) btnClickSize[1] = 1 이면 첫번째 버튼에 값이 들어갔었다는 것.
-  static Button findAddressbtn[] = new Button[6]; //위치를 검색하기 위한 5개의 버튼, 구현상의 편의를 위해 index 0은 사용하지 않는다.
 
-
-
-  // myEatingPlace용 음식점 찾기 변수
+  // findMyEatingPlace용 음식점 찾기 변수
   public static int myEatingPlacePOIItemSize;
   public static String[] myEatingPlaceFindPOIResult = new String[100];
   public static String[] myEatingPlaceFindAddressResult = new String[100];
@@ -68,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
       @Override
       public void onClick(View v) {
 
-       findEatingPlaceAddress();
+       findMyEatingPlaceAddress();
 
       }
     });
@@ -77,7 +67,7 @@ public class MainActivity extends AppCompatActivity {
       @Override
       public void onClick(View v) {
 
-        findAddress();
+        findEatingPlaceAddress();
 
       }
     });
@@ -100,7 +90,7 @@ public class MainActivity extends AppCompatActivity {
 
   }
 
-  public void findEatingPlaceAddress(){
+  public void findMyEatingPlaceAddress(){
 
     AlertDialog.Builder addressSearchBuilder1 = new AlertDialog.Builder(this, R.style.MyAlertDialogStyle);
     addressSearchBuilder1.setTitle("주소 검색");
@@ -168,7 +158,7 @@ public class MainActivity extends AppCompatActivity {
 
   }
 
-  public void findAddress() { // 주소 검색을 하는 메소드
+  public void findEatingPlaceAddress() { // 주소 검색을 하는 메소드
 
     AlertDialog.Builder addressSearchBuilder = new AlertDialog.Builder(this, R.style.MyAlertDialogStyle);
     addressSearchBuilder.setTitle("주소 검색");

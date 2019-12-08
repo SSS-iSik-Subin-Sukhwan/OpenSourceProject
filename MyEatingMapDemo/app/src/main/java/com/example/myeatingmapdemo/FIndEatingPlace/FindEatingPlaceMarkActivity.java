@@ -14,7 +14,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.myeatingmapdemo.MainActivity;
 import com.example.myeatingmapdemo.MyEatingPlace.MyEatingPlaceMark;
-import com.example.myeatingmapdemo.MyEatingPlace.MyEatingPlaceMemoActivty;
 import com.example.myeatingmapdemo.R;
 import com.skt.Tmap.TMapData;
 import com.skt.Tmap.TMapPOIItem;
@@ -23,7 +22,6 @@ import com.skt.Tmap.TMapView;
 
 import java.util.ArrayList;
 
-import static com.example.myeatingmapdemo.FIndEatingPlace.FindEatingPlaceResultViewActivity.foodListAdapter;
 import static com.example.myeatingmapdemo.Values.findEatingPlaceAddress;
 import static com.example.myeatingmapdemo.Values.findEatingPlaceName;
 import static com.example.myeatingmapdemo.Values.findEatingPlacePoint;

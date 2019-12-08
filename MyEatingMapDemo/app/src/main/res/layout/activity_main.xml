@@ -11,10 +11,10 @@
         android:background="@color/orange"
         android:id="@+id/first"
         android:layout_width="wrap_content"
-        android:layout_height="131dp"
+        android:layout_height="300dp"
         android:layout_gravity="left"
 
-        android:src="@drawable/mainframe" />
+        android:src="@drawable/main" />
 
 
 
@@ -25,7 +25,7 @@
             android:layout_height="70dp"
             android:layout_gravity="center"
             android:layout_marginLeft="20dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="20dp"
             android:layout_marginRight="20dp"
             android:layout_marginBottom="10dp"
             android:background="@drawable/button"

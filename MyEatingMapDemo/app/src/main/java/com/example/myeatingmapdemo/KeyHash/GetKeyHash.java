@@ -6,6 +6,7 @@ import android.content.pm.PackageManager;
 import android.content.pm.Signature;
 import android.util.Base64;
 import android.util.Log;
+import android.widget.Toast;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -25,6 +26,7 @@ public class GetKeyHash {
         md.update(signature.toByteArray());
         return Base64.encodeToString(md.digest(), Base64.NO_WRAP);
       } catch (NoSuchAlgorithmException e) {
+        Toast.makeText(context, "해시값입니다 :"+ e.toString(), Toast.LENGTH_LONG);
         e.printStackTrace();
         Log.e("err", e.toString());
 

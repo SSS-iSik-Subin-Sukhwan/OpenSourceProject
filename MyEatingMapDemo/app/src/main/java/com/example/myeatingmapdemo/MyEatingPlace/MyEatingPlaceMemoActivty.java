@@ -131,9 +131,3 @@ public class MyEatingPlaceMemoActivty extends AppCompatActivity {
     }
   }
 }
-/* 데이터 있는지 체크용
-
-  ValidateMemo validateMemoCheck = new ValidateMemo(userMemo, responseListener);
-  RequestQueue queue = Volley.newRequestQueue(MyEatingPlaceMemoActivty.this);
-    queue.add(validateMemoCheck);
-*/

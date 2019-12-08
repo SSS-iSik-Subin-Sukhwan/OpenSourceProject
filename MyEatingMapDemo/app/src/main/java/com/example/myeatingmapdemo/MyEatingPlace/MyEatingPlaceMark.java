@@ -11,8 +11,6 @@ import com.skt.Tmap.TMapView;
 
 import java.util.ArrayList;
 
-import static com.example.myeatingmapdemo.array_saving_class.alTMapPoint;
-import static com.example.myeatingmapdemo.array_saving_class.buttonNumArr;
 
 public class MyEatingPlaceMark {
   //

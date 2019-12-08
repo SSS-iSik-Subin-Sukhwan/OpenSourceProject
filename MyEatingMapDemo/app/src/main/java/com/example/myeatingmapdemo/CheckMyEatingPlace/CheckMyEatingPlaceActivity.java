@@ -5,14 +5,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.PointF;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
 import android.widget.LinearLayout;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.myeatingmapdemo.R;
 import com.skt.Tmap.TMapMarkerItem;
@@ -29,7 +24,6 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.List;
 
 
 public class CheckMyEatingPlaceActivity extends AppCompatActivity {

@@ -9,7 +9,6 @@ import android.widget.ListView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.myeatingmapdemo.KeyHash.GetKeyHash;
 import com.example.myeatingmapdemo.ListViewAdapter;
 import com.example.myeatingmapdemo.R;
 import com.kakao.kakaolink.v2.KakaoLinkResponse;
@@ -50,9 +49,6 @@ public class FindEatingPlaceResultViewActivity extends AppCompatActivity {
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_find_eating_place_result_view);
-
-    GetKeyHash.getKeyHash(this); // 키 해쉬값을 가져오는 메소드 수행
-
 
     Button loadingBtn = (Button)findViewById(R.id.loadingBtn);
 

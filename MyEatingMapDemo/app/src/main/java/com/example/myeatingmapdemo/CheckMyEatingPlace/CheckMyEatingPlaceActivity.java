@@ -7,7 +7,9 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.widget.LinearLayout;
 import android.widget.Linearlayout;
+import android.widget.TextView;
 
 import com.example.myeatingmapdemo.R;
 import com.skt.Tmap.TMapMarkerItem;

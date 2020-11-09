@@ -25,19 +25,7 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity {
 
 
-  // findMyEatingPlace용 음식점 찾기 변수
-  public static int myEatingPlacePOIItemSize;
-  public static String[] myEatingPlaceFindPOIResult = new String[100];
-  public static String[] myEatingPlaceFindAddressResult = new String[100];
-  public static double[] myEatingPlaceFindPOILat = new double[100];
-  public static double myEatingPalceFindPOILon[] = new double[100];
 
-  // findEatingPlace용 음식점 찾기 변수
-  public static int findEatingPlacePOIItemSize;
-  public static String findEatingPlaceFindPOIResult[] = new String[100];
-  public static String findEatingPlaceFindAddressResult[] = new String[100];
-  public static double findEatingPlaceFindPOILat[] = new double[100];
-  public static double findEatingPalceFindPOILon[] = new double[100];
 
 
 
@@ -45,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
-
+    
     TMapView tMapView = new TMapView(this); // key값 설정을 위한 tmapView 생성
     tMapView.setSKTMapApiKey( "dd8c0503-c4c7-42fa-87ed-5a0bb98ea44c" ); // api key 설정
 
@@ -117,11 +105,11 @@ public class MainActivity extends AppCompatActivity {
 
                 TMapPOIItem item = poiItem.get(i);
 
-                myEatingPlaceFindPOIResult[i] = item.getPOIName(); // POIResult[i]에 item에서 가져온 POI 이름을 저장
-                myEatingPlaceFindAddressResult[i] = item.getPOIAddress().replace("null", ""); // AddressResult[i]에 item에서 가져온 POI 주소를 저장
-                myEatingPlaceFindPOILat[i] = item.getPOIPoint().getLatitude(); // POI지점에 위도를 POILat[i]에 저장
-                myEatingPalceFindPOILon[i] = item.getPOIPoint().getLongitude(); // POI지점에 경도를 POILon[i]에 저장
-                myEatingPlacePOIItemSize = poiItem.size(); // poiItem값을 전해주기 위해 POIitemSize에 저장
+                Values.myEatingPlaceFindPOIResult[i] = item.getPOIName(); // POIResult[i]에 item에서 가져온 POI 이름을 저장
+                Values.myEatingPlaceFindAddressResult[i] = item.getPOIAddress().replace("null", ""); // AddressResult[i]에 item에서 가져온 POI 주소를 저장
+                Values.myEatingPlaceFindPOILat[i] = item.getPOIPoint().getLatitude(); // POI지점에 위도를 POILat[i]에 저장
+                Values.myEatingPalceFindPOILon[i] = item.getPOIPoint().getLongitude(); // POI지점에 경도를 POILon[i]에 저장
+                Values.myEatingPlacePOIItemSize = poiItem.size(); // poiItem값을 전해주기 위해 POIitemSize에 저장
 
               }
 
@@ -185,11 +173,11 @@ public class MainActivity extends AppCompatActivity {
 
                 TMapPOIItem item = poiItem.get(i);
 
-                findEatingPlaceFindPOIResult[i] = item.getPOIName(); // POIResult[i]에 item에서 가져온 POI 이름을 저장
-                findEatingPlaceFindAddressResult[i] = item.getPOIAddress().replace("null", ""); // AddressResult[i]에 item에서 가져온 POI 주소를 저장
-                findEatingPlaceFindPOILat[i] = item.getPOIPoint().getLatitude(); // POI지점에 위도를 POILat[i]에 저장
-                findEatingPalceFindPOILon[i] = item.getPOIPoint().getLongitude(); // POI지점에 경도를 POILon[i]에 저장
-                findEatingPlacePOIItemSize = poiItem.size(); // poiItem값을 전해주기 위해 POIitemSize에 저장
+                Values.findEatingPlaceFindPOIResult[i] = item.getPOIName(); // POIResult[i]에 item에서 가져온 POI 이름을 저장
+                Values.findEatingPlaceFindAddressResult[i] = item.getPOIAddress().replace("null", ""); // AddressResult[i]에 item에서 가져온 POI 주소를 저장
+                Values.findEatingPlaceFindPOILat[i] = item.getPOIPoint().getLatitude(); // POI지점에 위도를 POILat[i]에 저장
+                Values.findEatingPalceFindPOILon[i] = item.getPOIPoint().getLongitude(); // POI지점에 경도를 POILon[i]에 저장
+                Values.findEatingPlacePOIItemSize = poiItem.size(); // poiItem값을 전해주기 위해 POIitemSize에 저장
 
               }
 

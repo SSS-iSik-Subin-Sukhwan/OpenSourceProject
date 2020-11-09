@@ -76,7 +76,6 @@ public class FindEatingPlaceResultViewActivity extends AppCompatActivity {
 
       }
 
-
     });
 
     foodListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {

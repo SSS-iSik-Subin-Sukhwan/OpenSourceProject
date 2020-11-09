@@ -14,4 +14,19 @@ public class Values {
 
 
 
+  // findMyEatingPlace용 음식점 찾기 변수
+  public static int myEatingPlacePOIItemSize;
+  public static String[] myEatingPlaceFindPOIResult = new String[100];
+  public static String[] myEatingPlaceFindAddressResult = new String[100];
+  public static double[] myEatingPlaceFindPOILat = new double[100];
+  public static double myEatingPalceFindPOILon[] = new double[100];
+
+  // findEatingPlace용 음식점 찾기 변수
+  public static int findEatingPlacePOIItemSize;
+  public static String findEatingPlaceFindPOIResult[] = new String[100];
+  public static String findEatingPlaceFindAddressResult[] = new String[100];
+  public static double findEatingPlaceFindPOILat[] = new double[100];
+  public static double findEatingPalceFindPOILon[] = new double[100];
+
+
 }

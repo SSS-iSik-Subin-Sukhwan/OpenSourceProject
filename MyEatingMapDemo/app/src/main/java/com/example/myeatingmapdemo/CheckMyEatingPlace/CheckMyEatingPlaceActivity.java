@@ -8,7 +8,7 @@ import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.widget.LinearLayout;
-import android.widget.Linearlayout;
+//import android.widget.Linearlayout;
 import android.widget.TextView;
 
 import com.example.myeatingmapdemo.R;
@@ -27,7 +27,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 
-import static com.example.myeatingmapdemo.array_saving_class.alTMapPoint;
+//import static com.example.myeatingmapdemo.array_saving_class.alTMapPoint;
 
 public class CheckMyEatingPlaceActivity extends AppCompatActivity {
   private static ArrayList<TMapPoint> userPointArr = new ArrayList<>();

@@ -11,8 +11,6 @@ import com.skt.Tmap.TMapView;
 
 import java.util.ArrayList;
 
-import static com.example.myeatingmapdemo.array_saving_class.alTMapPoint;
-import static com.example.myeatingmapdemo.array_saving_class.buttonNumArr;
 
 public class MyEatingPlaceMark {
   //
@@ -21,7 +19,7 @@ public class MyEatingPlaceMark {
     TMapMarkerItem markerItem1 = new TMapMarkerItem();
 
     markerItem1.setIcon(markerImage); // 받아온 아이콘을 마커에 지정합니다.
-    markerItem1.setAutoCalloutVisible(true);
+
     // 마커의 좌표 지정
     markerItem1.setTMapPoint(markerItemPoint);
     //지도에 마커 추가

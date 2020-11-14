@@ -7,15 +7,6 @@
     android:orientation="vertical">
 
 
-
-    <RelativeLayout
-        android:id="@+id/InfraRelativeLayout"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity ="center"
-        >
-        <!--        android:background="@drawable/greywhite"-->
-
         <TextView
             android:id="@+id/list01"
             style="@style/BlackTopWhite"
@@ -25,24 +16,16 @@
             android:paddingStart="20dp"
             android:paddingLeft="20dp"
             android:paddingTop="60dp"
-            android:text="반경 1km 이내의 \n음식점 리스트입니다."
+            android:text="반경 1km 이내의 \n음식점 리스트입니다."></TextView>
 
-            />
-
-        <LinearLayout
-            android:id="@+id/buttonList01"
+        <Button
+            android:id="@+id/loadingBtn"
+            android:background="@drawable/button"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/black"
-            android:orientation="horizontal"
-            android:padding="16dp"
-            android:layout_below="@id/list01"
-            >
+            android:layout_height="50dp"
+            android:text="불러오기"
+            android:textColor="@color/white"/>
 
-
-
-
-        </LinearLayout>
 
 
 
@@ -54,6 +37,4 @@
             />
 
 
-
-    </RelativeLayout>
 </LinearLayout>

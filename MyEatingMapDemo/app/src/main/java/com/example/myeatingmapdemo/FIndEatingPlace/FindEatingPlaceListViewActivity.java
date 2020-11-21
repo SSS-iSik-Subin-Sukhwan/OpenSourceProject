@@ -36,13 +36,12 @@ public class FindEatingPlaceListViewActivity extends AppCompatActivity {
     for (int i = 0; i < findEatingPlacePOIItemSize; i++) {
       listViewAdapter.addItem(findEatingPlaceFindPOIResult[i], findEatingPlaceFindAddressResult[i], findEatingPlaceFindPOILat[i], findEatingPalceFindPOILon[i]);
     } // 어답터에 주소의 이름과 상세주소, 위도 경도 추가
+
     AddressListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
       @Override
       public void onItemClick(AdapterView<?> parent, View view, int position, long id) { //리스트뷰를 클릭했을때
 
         TMapPoint tMapPoint = new TMapPoint(findEatingPlaceFindPOILat[position], findEatingPalceFindPOILon[position]); //각 아이템의 좌표
-
-
 
         Values.findEatingPlacePoint = tMapPoint;
         Values.findEatingPlaceName = findEatingPlaceFindPOIResult[position];

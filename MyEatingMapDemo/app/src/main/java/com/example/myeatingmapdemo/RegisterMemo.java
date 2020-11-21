@@ -9,7 +9,7 @@ import java.util.Map;
 
 public class RegisterMemo extends StringRequest {
 
-    final static private String URL = "http://jkey20.cafe24.com/UserMemo.php";
+  final static private String URL = "http://jkey20.cafe24.com/UserMemo.php";
   private Map<String, String> parameters;
 
   public RegisterMemo(String userMemo, String userLat, String userLon, Response.Listener<String> listener){

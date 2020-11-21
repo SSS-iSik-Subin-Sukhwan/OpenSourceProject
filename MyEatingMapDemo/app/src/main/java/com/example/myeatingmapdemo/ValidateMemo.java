@@ -8,7 +8,7 @@ import java.util.Map;
 
 public class ValidateMemo extends StringRequest {
 
-    final static private String URL = "http://jkey20.cafe24.com/UserMemoCheck.php";
+  final static private String URL = "http://jkey20.cafe24.com/UserMemoCheck.php";
   private Map<String, String> parameters;
 
   public ValidateMemo(String userMemo, Response.Listener<String> listener){

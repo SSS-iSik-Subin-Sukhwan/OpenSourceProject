@@ -52,7 +52,6 @@ public class MyEatingPlaceListViewActivity extends AppCompatActivity {
         Intent MarkIntent = new Intent(getApplicationContext(), MyEatingPlaceMarkActivity.class); //검색한 위치를 띄우는 화면으로 보낸다.
         startActivity(MarkIntent);
 
-
       }
 
 

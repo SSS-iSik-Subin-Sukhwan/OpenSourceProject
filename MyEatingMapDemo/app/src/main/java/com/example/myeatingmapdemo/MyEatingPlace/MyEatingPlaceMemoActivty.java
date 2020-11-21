@@ -38,8 +38,6 @@ public class MyEatingPlaceMemoActivty extends AppCompatActivity {
     Button completeMemoBtn = (Button)findViewById(R.id.memocompletebtn);
     final EditText memoEditText = (EditText)findViewById(R.id.memoEdit);
 
-
-
     completeMemoBtn.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View v) {
@@ -49,9 +47,6 @@ public class MyEatingPlaceMemoActivty extends AppCompatActivity {
         if(validate){
           return;
         }
-
-
-
 
         Response.Listener<String> responseListener = new Response.Listener<String>() {
           @Override
@@ -101,15 +96,12 @@ public class MyEatingPlaceMemoActivty extends AppCompatActivity {
                         })
                         .create();
                 dialog.show();
-
-
               }
               else{
                 Toast.makeText(getApplicationContext(),"서버연결 실패!",Toast.LENGTH_LONG);
               }
             }
             catch(Exception e){
-
             }
           }
         };
@@ -119,7 +111,6 @@ public class MyEatingPlaceMemoActivty extends AppCompatActivity {
       }
 
     });
-
 
   }
   @Override

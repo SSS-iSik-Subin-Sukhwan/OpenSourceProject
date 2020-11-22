@@ -25,15 +25,13 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity {
 
 
-
-
-
+  FindAddress _address=new FindAddress(MainActivity.this);
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
-    
+
     TMapView tMapView = new TMapView(this); // key값 설정을 위한 tmapView 생성
     tMapView.setSKTMapApiKey( "dd8c0503-c4c7-42fa-87ed-5a0bb98ea44c" ); // api key 설정
 
@@ -45,8 +43,8 @@ public class MainActivity extends AppCompatActivity {
       @Override
       public void onClick(View v) {
 
-       findMyEatingPlaceAddress();
-
+       //findMyEatingPlaceAddress();
+        _address.findEatingPlaceAddress();
       }
     });
 
@@ -70,73 +68,7 @@ public class MainActivity extends AppCompatActivity {
 
   }
 
-  public void findMyEatingPlaceAddress(){
 
-    AlertDialog.Builder addressSearchBuilder1 = new AlertDialog.Builder(this, R.style.MyAlertDialogStyle);
-    addressSearchBuilder1.setTitle("주소 검색");
-
-     final EditText userInput = new EditText(this); // EditText로 사용자에게서 받음
-    addressSearchBuilder1.setView(userInput);
-
-    addressSearchBuilder1.setPositiveButton("확인", new DialogInterface.OnClickListener() {
-
-      @Override
-      public void onClick(DialogInterface dialog, int which) {
-
-        String strData = userInput.getText().toString(); // EditText에서 받은 String값을 strData에 저장
-
-        TMapData tmapData = new TMapData();
-
-        tmapData.findAllPOI(strData, new TMapData.FindAllPOIListenerCallback() {
-          @Override
-          public void onFindAllPOI(final ArrayList<TMapPOIItem> poiItem) {
-
-            if(poiItem.size() == 0){ // 검색결과 없을 시
-              Handler toastHandler = new Handler(Looper.getMainLooper());
-              toastHandler.postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                  Toast.makeText(getApplicationContext(), "검색 결과가 없습니다.", Toast.LENGTH_LONG).show();
-                }
-              }, 0);
-            }
-            else {
-              for (int i = 0; i < poiItem.size(); i++) {
-
-                TMapPOIItem item = poiItem.get(i);
-
-                Values.myEatingPlaceFindPOIResult[i] = item.getPOIName(); // POIResult[i]에 item에서 가져온 POI 이름을 저장
-                Values.myEatingPlaceFindAddressResult[i] = item.getPOIAddress().replace("null", ""); // AddressResult[i]에 item에서 가져온 POI 주소를 저장
-                Values.myEatingPlaceFindPOILat[i] = item.getPOIPoint().getLatitude(); // POI지점에 위도를 POILat[i]에 저장
-                Values.myEatingPalceFindPOILon[i] = item.getPOIPoint().getLongitude(); // POI지점에 경도를 POILon[i]에 저장
-                Values.myEatingPlacePOIItemSize = poiItem.size(); // poiItem값을 전해주기 위해 POIitemSize에 저장
-
-              }
-
-
-              Intent ListViewIntent = new Intent(getApplicationContext(), MyEatingPlaceListViewActivity.class);
-              startActivity(ListViewIntent); // 리스트뷰 띄우는 액티비티로 이동
-
-            }
-
-          }
-
-        });
-
-      }
-
-    });
-
-    addressSearchBuilder1.setNegativeButton("취소", new DialogInterface.OnClickListener() {
-      @Override
-      public void onClick(DialogInterface dialog, int which) {
-        dialog.cancel();
-      }
-    });
-    addressSearchBuilder1.show();
-
-
-  }
 
   public void findEatingPlaceAddress() { // 주소 검색을 하는 메소드
 

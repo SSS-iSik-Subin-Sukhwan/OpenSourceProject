@@ -10,8 +10,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.myeatingmapdemo.CheckMyEatingPlace.CheckMyEatingPlaceActivity;
 import com.skt.Tmap.TMapView;
 
-public class MainActivity extends AppCompatActivity {
-  FindAddress _address = new FindAddress(MainActivity.this);
+
+public class MainActivity extends AppCompatActivity{
+
+
+  FindAddress _address=new FindAddress(MainActivity.this);
+
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -28,14 +32,18 @@ public class MainActivity extends AppCompatActivity {
     myEatingPlaceMemoBtn.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View v) {
-        _address.findEatingPlaceAddress(1);
+       //findMyEatingPlaceAddress();
+        _address.findRestaurantAddress(1);
+
       }
     });
 
     findEatingPlaceBtn.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View v) {
-        _address.findEatingPlaceAddress(2);
+        _address.findRestaurantAddress(2);
+        //findEatingPlaceAddress();
+
       }
     });
 

@@ -24,7 +24,7 @@ public class FindAddress {
         values = new Values();
     }
 
-    public void  findEatingPlaceAddress(final int num){
+    public void  findRestaurantAddress(final int num){
         AlertDialog.Builder addressSearchBuilder1 = new AlertDialog.Builder(context, R.style.MyAlertDialogStyle);
         addressSearchBuilder1.setTitle("주소 검색");
 
@@ -54,7 +54,7 @@ public class FindAddress {
                             }, 0);
                         }
                         else {
-                            switchPoiList(num,poiItem);
+                            createPoiList(num,poiItem);
                         }
                     }
                 });
@@ -69,7 +69,8 @@ public class FindAddress {
         addressSearchBuilder1.show();
     }
 
-    public void switchPoiList(int num,final ArrayList<TMapPOIItem> poi){
+
+    public void createPoiList(int num,final ArrayList<TMapPOIItem> poi){
         for (int i = 0; i < poi.size(); i++) {
             TMapPOIItem item = poi.get(i);
 
@@ -79,6 +80,7 @@ public class FindAddress {
             values.setPlaceFindPOILon(item.getPOIPoint().getLongitude(), i);
             values.setPlacePOIItemSize(poi.size());
         }
+
 
         switch(num)
         {

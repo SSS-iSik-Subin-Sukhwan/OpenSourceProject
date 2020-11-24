@@ -11,9 +11,7 @@ import com.example.myeatingmapdemo.CheckMyEatingPlace.CheckMyEatingPlaceActivity
 import com.skt.Tmap.TMapView;
 
 public class MainActivity extends AppCompatActivity {
-
-
-  FindAddress _address=new FindAddress(MainActivity.this);
+  FindAddress _address = new FindAddress(MainActivity.this);
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -30,7 +28,6 @@ public class MainActivity extends AppCompatActivity {
     myEatingPlaceMemoBtn.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View v) {
-       //findMyEatingPlaceAddress();
         _address.findEatingPlaceAddress(1);
       }
     });
@@ -39,7 +36,6 @@ public class MainActivity extends AppCompatActivity {
       @Override
       public void onClick(View v) {
         _address.findEatingPlaceAddress(2);
-        //findEatingPlaceAddress();
       }
     });
 

@@ -18,22 +18,29 @@ import com.example.myeatingmapdemo.MainActivity;
 import com.example.myeatingmapdemo.R;
 import com.example.myeatingmapdemo.RegisterMemo;
 import com.example.myeatingmapdemo.ValidateMemo;
+import com.example.myeatingmapdemo.Values;
 
 import org.json.JSONObject;
 
-import static com.example.myeatingmapdemo.Values.findMyPlacePoint;
-
 public class MyEatingPlaceMemoActivty extends AppCompatActivity {
 
-  private String memoUserLat = String.valueOf(findMyPlacePoint.getLatitude());
-  private String memoUserLon = String.valueOf(findMyPlacePoint.getLongitude());
+  private String memoUserLat;
+  private String memoUserLon;
   private boolean validate = false;
   private AlertDialog dialog;
   String memoString;
+  Values values;
+
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_my_eating_place_memo_activty);
+
+    Intent intent = getIntent();
+    values = (Values) intent.getSerializableExtra("values");
+
+    memoUserLat = String.valueOf(values.getPlacePoint().getLatitude());
+    memoUserLon = String.valueOf(values.getPlacePoint().getLongitude());
 
     Button completeMemoBtn = (Button)findViewById(R.id.memocompletebtn);
     final EditText memoEditText = (EditText)findViewById(R.id.memoEdit);

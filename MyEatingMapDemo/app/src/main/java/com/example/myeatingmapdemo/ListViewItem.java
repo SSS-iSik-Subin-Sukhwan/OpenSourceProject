@@ -1,29 +1,26 @@
 package com.example.myeatingmapdemo;
 
 public class ListViewItem {
+  private String POIStr;
+  private String AddressStr;
+  private double POIlatitude;
+  private double POIlongitude;
 
-  String POIStr ;
-  String AddressStr ;
-  double POIlat;
-  double POIlon;
+  public ListViewItem() {
+    POIStr = new String();
+    AddressStr = new String();
 
-  public void setPOIStr(String title) {
-    POIStr = title ;
-  }
-  public void setAddressStr(String desc) {
-    AddressStr = desc ;
-  }
-  public String getPOIStr() {
-    return this.POIStr ;
-  }
-  public String getAddressStr() {
-    return this.AddressStr ;
-  }
-  public  void setLat(double lat){
-    POIlat = lat;
-  }
-  public  void setLon(double lon){
-    POIlon = lon;
+    POIlatitude = 0;
+    POIlongitude = 0;
   }
 
+  public String getPOIStr() { return POIStr; }
+  public String getAddressStr() { return AddressStr; }
+  public double getPOIlatitude() { return POIlatitude; }
+  public double getPOIlongitude() { return POIlongitude; }
+
+  public void setPOIStr(String POI) { POIStr = POI; }
+  public void setAddressStr(String address) { AddressStr = address; }
+  public void setPOIlatitude(double latitude) { POIlatitude = latitude; }
+  public void setPOIlongitude(double longitude) { POIlongitude = longitude; }
 }

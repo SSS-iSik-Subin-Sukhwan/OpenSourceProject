@@ -86,7 +86,7 @@ public class FindEatingPlaceResultViewActivity extends AppCompatActivity {
           public void run() {
             try {
 
-              String kakaoName  = foodList[i]; // 카카오톡에 공유할 때 제목에 사용될 String값을 foodList에 i번에서 가져옴
+              //String kakaoName  = foodList[i]; // 카카오톡에 공유할 때 제목에 사용될 String값을 foodList에 i번에서 가져옴
 
               String getKakaoAddress = null; // 주소값을 가져옴
 
@@ -102,12 +102,12 @@ public class FindEatingPlaceResultViewActivity extends AppCompatActivity {
               // LocationTemplate에 왼쪽 버튼을 설정
               ButtonObject leftButtonObject = new ButtonObject("앱으로 돌아가기", // 왼쪽 버튼의 표시될 텍스트를 설정
                                                                LinkObject.newBuilder()
-                                                                       .setWebUrl("https://map.kakao.com/link/map/"+ kakaoAddress + "," + kakaoName) //
-                                                                       .setMobileWebUrl("https://map.kakao.com/link/map/"+ kakaoAddress + "," + kakaoName)
+                                                                       .setWebUrl("https://map.kakao.com/link/map/"+ kakaoAddress + "," + foodList[i]) //
+                                                                       .setMobileWebUrl("https://map.kakao.com/link/map/"+ kakaoAddress + "," + foodList[i])
                                                                        .build());
 
               LocationTemplate params = LocationTemplate.newBuilder(kakaoAddressResult , // 위치 확인시 보여줄 주소칸에 표시될 값을 설정해줌
-                      ContentObject.newBuilder(kakaoName, // 카카오톡 공유시 보여줄 ContentObject를 생성, 제목란에 선택한 주변시설의 명칭을 띄워줌
+                      ContentObject.newBuilder(foodList[i], // 카카오톡 공유시 보여줄 ContentObject를 생성, 제목란에 선택한 주변시설의 명칭을 띄워줌
                               "https://ifh.cc/g/U4E0B.png", // 카카오톡 공유시 보여지는 이미지 설정
                               LinkObject.newBuilder()
 
@@ -118,7 +118,7 @@ public class FindEatingPlaceResultViewActivity extends AppCompatActivity {
                               .setDescrption("https://map.kakao.com/link/map/"+ kakaoAddressResult + "," +foodTMapPoint[i].getLatitude()+ "," + foodTMapPoint[i].getLongitude()) // 카카오톡 공유시 설명칸에 하이퍼링크형식으로 웹상에서 지도를 띄워주게 설정
                               .build())
 
-                      .setAddressTitle(kakaoName) // 위치 확인시 보여줄 제목칸에 선택한 주변시설의 명칭을 띄워줌
+                      .setAddressTitle(foodList[i]) // 위치 확인시 보여줄 제목칸에 선택한 주변시설의 명칭을 띄워줌
                       .addButton(leftButtonObject) // 왼쪽버튼에 해당하는 ButtonObject를 추가
 
                       .build();

@@ -2,6 +2,7 @@ package com.example.myeatingmapdemo;
 
 import com.skt.Tmap.TMapPoint;
 
+
 import java.io.Serializable;
 
 public class Values implements Serializable {

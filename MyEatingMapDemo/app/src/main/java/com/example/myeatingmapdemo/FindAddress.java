@@ -8,8 +8,7 @@ import android.os.Looper;
 import android.widget.EditText;
 import android.widget.Toast;
 import androidx.appcompat.app.AlertDialog;
-import com.example.myeatingmapdemo.FIndEatingPlace.FindEatingPlaceListViewActivity;
-import com.example.myeatingmapdemo.MyEatingPlace.MyEatingPlaceListViewActivity;
+
 import com.skt.Tmap.TMapData;
 import com.skt.Tmap.TMapPOIItem;
 import java.util.ArrayList;
@@ -69,7 +68,7 @@ public class FindAddress {
         addressSearchBuilder1.show();
     }
 
-    public void switchPoiList(int num,final ArrayList<TMapPOIItem> poi){
+    public void switchPoiList(int num,final ArrayList<TMapPOIItem> poi) {
         for (int i = 0; i < poi.size(); i++) {
             TMapPOIItem item = poi.get(i);
 
@@ -80,18 +79,12 @@ public class FindAddress {
             values.setPlacePOIItemSize(poi.size());
         }
 
-        switch(num)
-        {
-            case 1:
-                Intent ListViewIntent = new Intent(context, MyEatingPlaceListViewActivity.class);
-                ListViewIntent.putExtra("values", values);
-                context.startActivity(ListViewIntent);
-                break;
-            case 2:
-                Intent ListViewIntent2 = new Intent(context, FindEatingPlaceListViewActivity.class);
-                ListViewIntent2.putExtra("values", values);
-                context.startActivity(ListViewIntent2);
-                break;
-        }
+        Intent ListViewIntent = new Intent(context, PlaceListView.class);
+        ListViewIntent.putExtra("values", values);
+
+        if(num == 1) ListViewIntent.putExtra("kind", "My");
+        else ListViewIntent.putExtra("kind", "Find");
+
+        context.startActivity(ListViewIntent);
     }
 }

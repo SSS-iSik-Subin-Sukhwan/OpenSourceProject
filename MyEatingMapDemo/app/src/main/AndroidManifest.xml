@@ -19,8 +19,7 @@
         <activity android:name=".MyEatingPlace.MyEatingPlaceMemoActivty" />
         <activity android:name=".MyEatingPlace.MyEatingPlaceMarkActivity" />
         <activity android:name=".FIndEatingPlace.FindEatingPlaceMarkActivity" />
-        <activity android:name=".FIndEatingPlace.FindEatingPlaceListViewActivity" />
-        <activity android:name=".MyEatingPlace.MyEatingPlaceListViewActivity" />
+        <activity android:name=".PlaceListView" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

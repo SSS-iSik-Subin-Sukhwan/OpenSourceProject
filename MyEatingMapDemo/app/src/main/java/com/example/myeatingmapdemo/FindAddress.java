@@ -22,7 +22,7 @@ public class FindAddress {
         this.context=context;
     }
 
-    public void  findEatingPlaceAddress(final int num){
+    public void  findRestaurantAddress(final int num){
         AlertDialog.Builder addressSearchBuilder1 = new AlertDialog.Builder(context, R.style.MyAlertDialogStyle);
         addressSearchBuilder1.setTitle("주소 검색");
 
@@ -52,7 +52,7 @@ public class FindAddress {
                             }, 0);
                         }
                         else {
-                            switchPoiList(num,poiItem);
+                            createPoiList(num,poiItem);
                         }
                     }
                 });
@@ -67,7 +67,7 @@ public class FindAddress {
         addressSearchBuilder1.show();
     }
 
-    public void switchPoiList(int num,final ArrayList<TMapPOIItem> poi){
+    public void createPoiList(int num,final ArrayList<TMapPOIItem> poi){
 
         switch(num)
         {

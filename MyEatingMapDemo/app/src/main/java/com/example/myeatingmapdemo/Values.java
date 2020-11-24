@@ -2,31 +2,59 @@ package com.example.myeatingmapdemo;
 
 import com.skt.Tmap.TMapPoint;
 
-public class Values {
 
-  public static TMapPoint findMyPlacePoint = new TMapPoint(0, 0);
-  public static String findMyPlaceName = new String();
-  public static String findMyPlaceAddress = new String();
+import java.io.Serializable;
 
-  public static TMapPoint findEatingPlacePoint = new TMapPoint(0, 0);
-  public static String findEatingPlaceName = new String();
-  public static String findEatingPlaceAddress = new String();
+public class Values implements Serializable {
+  private double placeLatitude;
+  private double placeLongitude;
+  private String placeName;
+  private String placeAddress;
 
+  private int placePOIItemSize;
+  private String[] placeFindPOIResult;
+  private String[] placeFindAddressResult;
+  private double[] placeFindPOILat;
+  private double[] placeFindPOILon;
 
+  public Values() {
+    placeLatitude = 0;
+    placeLongitude = 0;
+    placeName = new String();
+    placeAddress = new String();
 
-  // findMyEatingPlace용 음식점 찾기 변수
-  public static int myEatingPlacePOIItemSize;
-  public static String[] myEatingPlaceFindPOIResult = new String[100];
-  public static String[] myEatingPlaceFindAddressResult = new String[100];
-  public static double[] myEatingPlaceFindPOILat = new double[100];
-  public static double myEatingPalceFindPOILon[] = new double[100];
+    placePOIItemSize = 0;
+    placeFindPOIResult = new String[100];
+    placeFindAddressResult = new String[100];
+    placeFindPOILat = new double[100];
+    placeFindPOILon = new double[100];
+  }
 
-  // findEatingPlace용 음식점 찾기 변수
-  public static int findEatingPlacePOIItemSize;
-  public static String findEatingPlaceFindPOIResult[] = new String[100];
-  public static String findEatingPlaceFindAddressResult[] = new String[100];
-  public static double findEatingPlaceFindPOILat[] = new double[100];
-  public static double findEatingPalceFindPOILon[] = new double[100];
+  public double getPlaceLatitude() { return placeLatitude; }
+  public double getPlaceLongitude() { return placeLongitude; }
+  public TMapPoint getPlacePoint() {
+    TMapPoint point = new TMapPoint(placeLatitude, placeLongitude);
+    return point;
+  }
+  public String getPlaceName() { return placeName; }
+  public String getPlaceAddress() { return placeAddress; }
 
+  public int getPlacePOIItemSize() { return placePOIItemSize; }
+  public String[] getPlaceFindPOIResult() { return placeFindPOIResult; }
+  public String[] getPlaceFindAddressResult() { return placeFindAddressResult; }
+  public double[] getPlaceFindPOILat() { return placeFindPOILat; }
+  public double[] getPlaceFindPOILon() { return placeFindPOILon; }
 
+  public void setPlacePoint(TMapPoint point) {
+    placeLatitude = point.getLatitude();
+    placeLongitude = point.getLongitude();
+  }
+  public void setPlaceName(String name) { placeName = name; }
+  public void setPlaceAddress(String address) { placeAddress = address; }
+
+  public void setPlacePOIItemSize(int size) { placePOIItemSize = size; }
+  public void setPlaceFindPOIResult(String result, int idx) { placeFindPOIResult[idx] = result; }
+  public void setPlaceFindAddressResult(String address, int idx) { placeFindAddressResult[idx] = address; }
+  public void setPlaceFindPOILat(double latitude, int idx) { placeFindPOILat[idx] = latitude; }
+  public void setPlaceFindPOILon(double longitude, int idx) { placeFindPOILon[idx] = longitude; }
 }

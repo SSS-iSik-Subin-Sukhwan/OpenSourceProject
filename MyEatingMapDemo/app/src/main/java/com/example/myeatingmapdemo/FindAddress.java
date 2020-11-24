@@ -7,13 +7,11 @@ import android.os.Handler;
 import android.os.Looper;
 import android.widget.EditText;
 import android.widget.Toast;
-
 import androidx.appcompat.app.AlertDialog;
-
+import com.example.myeatingmapdemo.FIndEatingPlace.FindEatingPlaceListViewActivity;
 import com.example.myeatingmapdemo.MyEatingPlace.MyEatingPlaceListViewActivity;
 import com.skt.Tmap.TMapData;
 import com.skt.Tmap.TMapPOIItem;
-
 import java.util.ArrayList;
 
 public class FindAddress {
@@ -24,7 +22,7 @@ public class FindAddress {
         this.context=context;
     }
 
-    public void  findEatingPlaceAddress(){
+    public void  findEatingPlaceAddress(final int num){
         AlertDialog.Builder addressSearchBuilder1 = new AlertDialog.Builder(context, R.style.MyAlertDialogStyle);
         addressSearchBuilder1.setTitle("주소 검색");
 
@@ -54,32 +52,12 @@ public class FindAddress {
                             }, 0);
                         }
                         else {
-                            for (int i = 0; i < poiItem.size(); i++) {
-
-                                TMapPOIItem item = poiItem.get(i);
-
-                                Values.myEatingPlaceFindPOIResult[i] = item.getPOIName(); // POIResult[i]에 item에서 가져온 POI 이름을 저장
-                                Values.myEatingPlaceFindAddressResult[i] = item.getPOIAddress().replace("null", ""); // AddressResult[i]에 item에서 가져온 POI 주소를 저장
-                                Values.myEatingPlaceFindPOILat[i] = item.getPOIPoint().getLatitude(); // POI지점에 위도를 POILat[i]에 저장
-                                Values.myEatingPalceFindPOILon[i] = item.getPOIPoint().getLongitude(); // POI지점에 경도를 POILon[i]에 저장
-                                Values.myEatingPlacePOIItemSize = poiItem.size(); // poiItem값을 전해주기 위해 POIitemSize에 저장
-
-                            }
-
-
-                            Intent ListViewIntent = new Intent(context, MyEatingPlaceListViewActivity.class);
-                            //startActivity(ListViewIntent); // 리스트뷰 띄우는 액티비티로 이동
-                            context.startActivity(ListViewIntent);
+                            switchPoiList(num,poiItem);
                         }
-
                     }
-
                 });
-
             }
-
         });
-
         addressSearchBuilder1.setNegativeButton("취소", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
@@ -87,7 +65,37 @@ public class FindAddress {
             }
         });
         addressSearchBuilder1.show();
+    }
 
+    public void switchPoiList(int num,final ArrayList<TMapPOIItem> poi){
 
+        switch(num)
+        {
+            case 1:
+                for (int i = 0; i < poi.size(); i++) {
+                    TMapPOIItem item = poi.get(i);
+                    Values.myEatingPlaceFindPOIResult[i] = item.getPOIName(); // POIResult[i]에 item에서 가져온 POI 이름을 저장
+                    Values.myEatingPlaceFindAddressResult[i] = item.getPOIAddress().replace("null", ""); // AddressResult[i]에 item에서 가져온 POI 주소를 저장
+                    Values.myEatingPlaceFindPOILat[i] = item.getPOIPoint().getLatitude(); // POI지점에 위도를 POILat[i]에 저장
+                    Values.myEatingPalceFindPOILon[i] = item.getPOIPoint().getLongitude(); // POI지점에 경도를 POILon[i]에 저장
+                    Values.myEatingPlacePOIItemSize = poi.size(); // poiItem값을 전해주기 위해 POIitemSize에 저장
+                }
+                Intent ListViewIntent = new Intent(context, MyEatingPlaceListViewActivity.class);
+                //startActivity(ListViewIntent); // 리스트뷰 띄우는 액티비티로 이동
+                context.startActivity(ListViewIntent);
+                break;
+            case 2:
+                for (int i = 0; i < poi.size(); i++) {
+                    TMapPOIItem item = poi.get(i);
+                    Values.findEatingPlaceFindPOIResult[i] = item.getPOIName(); // POIResult[i]에 item에서 가져온 POI 이름을 저장
+                    Values.findEatingPlaceFindAddressResult[i] = item.getPOIAddress().replace("null", ""); // AddressResult[i]에 item에서 가져온 POI 주소를 저장
+                    Values.findEatingPlaceFindPOILat[i] = item.getPOIPoint().getLatitude(); // POI지점에 위도를 POILat[i]에 저장
+                    Values.findEatingPalceFindPOILon[i] = item.getPOIPoint().getLongitude(); // POI지점에 경도를 POILon[i]에 저장
+                    Values.findEatingPlacePOIItemSize = poi.size(); // poiItem값을 전해주기 위해 POIitemSize에 저장
+                }
+                Intent ListViewIntent2 = new Intent(context, FindEatingPlaceListViewActivity.class);
+                context.startActivity(ListViewIntent2); // 리스트뷰 띄우는 액티비티로 이동
+                break;
+        }
     }
 }

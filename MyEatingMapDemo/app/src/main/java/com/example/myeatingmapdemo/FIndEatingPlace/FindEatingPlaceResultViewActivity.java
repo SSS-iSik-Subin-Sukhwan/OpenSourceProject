@@ -76,7 +76,6 @@ public class FindEatingPlaceResultViewActivity extends AppCompatActivity {
 
       }
 
-
     });
 
     foodListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -108,16 +107,16 @@ public class FindEatingPlaceResultViewActivity extends AppCompatActivity {
                                                                        .build());
 
               LocationTemplate params = LocationTemplate.newBuilder(kakaoAddressResult , // 위치 확인시 보여줄 주소칸에 표시될 값을 설정해줌
-                                                                    ContentObject.newBuilder(kakaoName, // 카카오톡 공유시 보여줄 ContentObject를 생성, 제목란에 선택한 주변시설의 명칭을 띄워줌
-                                                                                             "https://ifh.cc/g/U4E0B.png", // 카카오톡 공유시 보여지는 이미지 설정
-                                                                                             LinkObject.newBuilder()
+                      ContentObject.newBuilder(kakaoName, // 카카오톡 공유시 보여줄 ContentObject를 생성, 제목란에 선택한 주변시설의 명칭을 띄워줌
+                              "https://ifh.cc/g/U4E0B.png", // 카카오톡 공유시 보여지는 이미지 설정
+                              LinkObject.newBuilder()
 
-                                                                                                     .setWebUrl("https://map.kakao.com/link/map/"+ kakaoAddressResult + "," + foodTMapPoint[i].getLatitude()+ "," + foodTMapPoint[i].getLongitude()) // 만약 웹에서 버튼들의 기능이 수행이 안된다면 주어진 링크로 이동
-                                                                                                     .setMobileWebUrl("https://map.kakao.com/link/map/"+ kakaoAddressResult + "," + foodTMapPoint[i].getLatitude()+ "," + foodTMapPoint[i].getLongitude()) // 만약 모바일에서 버튼들의 기능이 수행이 안된다면 주어진 링크로 이동
-                                                                                                     .build())
+                                      .setWebUrl("https://map.kakao.com/link/map/"+ kakaoAddressResult + "," + foodTMapPoint[i].getLatitude()+ "," + foodTMapPoint[i].getLongitude()) // 만약 웹에서 버튼들의 기능이 수행이 안된다면 주어진 링크로 이동
+                                      .setMobileWebUrl("https://map.kakao.com/link/map/"+ kakaoAddressResult + "," + foodTMapPoint[i].getLatitude()+ "," + foodTMapPoint[i].getLongitude()) // 만약 모바일에서 버튼들의 기능이 수행이 안된다면 주어진 링크로 이동
+                                      .build())
 
-                                                                            .setDescrption("https://map.kakao.com/link/map/"+ kakaoAddressResult + "," +foodTMapPoint[i].getLatitude()+ "," + foodTMapPoint[i].getLongitude()) // 카카오톡 공유시 설명칸에 하이퍼링크형식으로 웹상에서 지도를 띄워주게 설정
-                                                                            .build())
+                              .setDescrption("https://map.kakao.com/link/map/"+ kakaoAddressResult + "," +foodTMapPoint[i].getLatitude()+ "," + foodTMapPoint[i].getLongitude()) // 카카오톡 공유시 설명칸에 하이퍼링크형식으로 웹상에서 지도를 띄워주게 설정
+                              .build())
 
                       .setAddressTitle(kakaoName) // 위치 확인시 보여줄 제목칸에 선택한 주변시설의 명칭을 띄워줌
                       .addButton(leftButtonObject) // 왼쪽버튼에 해당하는 ButtonObject를 추가

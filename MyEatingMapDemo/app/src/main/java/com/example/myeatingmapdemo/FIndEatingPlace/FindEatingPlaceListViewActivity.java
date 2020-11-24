@@ -12,11 +12,6 @@ import com.example.myeatingmapdemo.ListViewAdapter;
 import com.example.myeatingmapdemo.R;
 import com.example.myeatingmapdemo.Values;
 import com.skt.Tmap.TMapPoint;
-import static com.example.myeatingmapdemo.MainActivity.findEatingPlacePOIItemSize;
-import static com.example.myeatingmapdemo.MainActivity.findEatingPlaceFindAddressResult;
-import static com.example.myeatingmapdemo.MainActivity.findEatingPlaceFindPOILat;
-import static com.example.myeatingmapdemo.MainActivity.findEatingPalceFindPOILon;
-import static com.example.myeatingmapdemo.MainActivity.findEatingPlaceFindPOIResult;
 
 public class FindEatingPlaceListViewActivity extends AppCompatActivity {
 
@@ -33,20 +28,20 @@ public class FindEatingPlaceListViewActivity extends AppCompatActivity {
     AddressListView = (ListView) findViewById(R.id.Addresslistview);
     AddressListView.setAdapter(listViewAdapter); // 리스트뷰에 어답터 연결
 
-    for (int i = 0; i < findEatingPlacePOIItemSize; i++) {
-      listViewAdapter.addItem(findEatingPlaceFindPOIResult[i], findEatingPlaceFindAddressResult[i], findEatingPlaceFindPOILat[i], findEatingPalceFindPOILon[i]);
+    for (int i = 0; i < Values.findEatingPlacePOIItemSize; i++) {
+      listViewAdapter.addItem(Values.findEatingPlaceFindPOIResult[i], Values.findEatingPlaceFindAddressResult[i], Values.findEatingPlaceFindPOILat[i], Values.findEatingPalceFindPOILon[i]);
     } // 어답터에 주소의 이름과 상세주소, 위도 경도 추가
     AddressListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
       @Override
       public void onItemClick(AdapterView<?> parent, View view, int position, long id) { //리스트뷰를 클릭했을때
 
-        TMapPoint tMapPoint = new TMapPoint(findEatingPlaceFindPOILat[position], findEatingPalceFindPOILon[position]); //각 아이템의 좌표
+        TMapPoint tMapPoint = new TMapPoint(Values.findEatingPlaceFindPOILat[position], Values.findEatingPalceFindPOILon[position]); //각 아이템의 좌표
 
 
 
         Values.findEatingPlacePoint = tMapPoint;
-        Values.findEatingPlaceName = findEatingPlaceFindPOIResult[position];
-        Values.findEatingPlaceAddress = findEatingPlaceFindAddressResult[position];
+        Values.findEatingPlaceName = Values.findEatingPlaceFindPOIResult[position];
+        Values.findEatingPlaceAddress = Values.findEatingPlaceFindAddressResult[position];
 
 
         Intent MarkIntent = new Intent(getApplicationContext(), FindEatingPlaceMarkActivity.class); //검색한 위치를 띄우는 화면으로 보낸다.

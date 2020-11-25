@@ -15,16 +15,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.myeatingmapdemo.MainActivity;
 import com.example.myeatingmapdemo.MyEatingPlace.MyEatingPlaceMark;
 import com.example.myeatingmapdemo.R;
+import com.example.myeatingmapdemo.Values;
 import com.skt.Tmap.TMapData;
 import com.skt.Tmap.TMapPOIItem;
 import com.skt.Tmap.TMapPoint;
 import com.skt.Tmap.TMapView;
 
 import java.util.ArrayList;
-
-import static com.example.myeatingmapdemo.Values.findEatingPlaceAddress;
-import static com.example.myeatingmapdemo.Values.findEatingPlaceName;
-import static com.example.myeatingmapdemo.Values.findEatingPlacePoint;
 
 public class FindEatingPlaceMarkActivity extends AppCompatActivity {
 
@@ -44,11 +41,16 @@ public class FindEatingPlaceMarkActivity extends AppCompatActivity {
   public static double[] foodLon = new double[21];
   public static int foodSize = 0;
 
+  Values values;
+
   @Override
   protected void onCreate(Bundle savedInstanceState) {
 
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_my_eating_place_mark);
+
+    Intent intent = getIntent();
+    values = (Values) intent.getSerializableExtra("values");
 
 
     LinearLayout linearLayoutTmap = (LinearLayout) findViewById(R.id.mapview);
@@ -60,14 +62,14 @@ public class FindEatingPlaceMarkActivity extends AppCompatActivity {
 
     markerImage = BitmapFactory.decodeResource(this.getResources(), R.drawable.markerblack); // 중간지점의 마커로 사용할 이미지 지정
 
-    MyEatingPlaceMark.markReturn(markerImage, tMapView, findEatingPlacePoint); // 검색한 위치에 마커를 뜨게 하는 메소드
+    MyEatingPlaceMark.markReturn(markerImage, tMapView, values.getPlacePoint()); // 검색한 위치에 마커를 뜨게 하는 메소드
 
     initialPoint = new TMapPoint(0,0);
 
-    address_textView.setText(findEatingPlaceAddress); // 프레임 레이아웃의 제목텍스트를 검색한 위치의 이름으로 설정
-    name_textView.setText(findEatingPlaceName); // 프레임 레이아웃의 주소텍스트를 검색한 위치의 주소로 설정
+    address_textView.setText(values.getPlaceAddress()); // 프레임 레이아웃의 제목텍스트를 검색한 위치의 이름으로 설정
+    name_textView.setText(values.getPlaceName()); // 프레임 레이아웃의 주소텍스트를 검색한 위치의 주소로 설정
 
-    tMapView.setCenterPoint(findEatingPlacePoint.getLongitude(), findEatingPlacePoint.getLatitude()); // tMapView가 보여지는 곳을 검색한 좌표로 설정함
+    tMapView.setCenterPoint(values.getPlacePoint().getLongitude(), values.getPlacePoint().getLatitude()); // tMapView가 보여지는 곳을 검색한 좌표로 설정함
 
 
     yesBtn = (Button) findViewById(R.id.yesBtn);
@@ -77,7 +79,7 @@ public class FindEatingPlaceMarkActivity extends AppCompatActivity {
       public void onClick(View view) {
 
         TMapData tmapdata1 = new TMapData();
-        TMapPoint point1 = findEatingPlacePoint;
+        TMapPoint point1 = values.getPlacePoint();
 
         tmapdata1.findAroundNamePOI(point1, "한식;중식;양식", 1, 20, new TMapData.FindAroundNamePOIListenerCallback() {
           @Override

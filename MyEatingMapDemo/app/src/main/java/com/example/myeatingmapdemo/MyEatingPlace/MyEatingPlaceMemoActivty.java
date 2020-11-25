@@ -16,9 +16,7 @@ import com.android.volley.Response;
 import com.android.volley.toolbox.Volley;
 import com.example.myeatingmapdemo.MainActivity;
 import com.example.myeatingmapdemo.R;
-import com.example.myeatingmapdemo.RegisterMemo;
-import com.example.myeatingmapdemo.ValidateMemo;
-
+import com.example.myeatingmapdemo.MemoProcessing;
 import org.json.JSONObject;
 
 import static com.example.myeatingmapdemo.Values.findMyPlacePoint;
@@ -29,7 +27,9 @@ public class MyEatingPlaceMemoActivty extends AppCompatActivity {
   private String memoUserLon = String.valueOf(findMyPlacePoint.getLongitude());
   private boolean validate = false;
   private AlertDialog dialog;
+  private Response.Listener<String> responseListener;
   String memoString;
+
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -38,90 +38,103 @@ public class MyEatingPlaceMemoActivty extends AppCompatActivity {
     Button completeMemoBtn = (Button)findViewById(R.id.memocompletebtn);
     final EditText memoEditText = (EditText)findViewById(R.id.memoEdit);
 
-
-
     completeMemoBtn.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View v) {
 
         memoString = memoEditText.getText().toString();
 
-        if(validate){
+        if (validate) {
           return;
         }
 
+        checkServer();
+        setValidateQueue();
 
-
-
-        Response.Listener<String> responseListener = new Response.Listener<String>() {
-          @Override
-          public void onResponse(String response) {
-            try{
-              JSONObject jsonResponse = new JSONObject(response);
-              boolean success = jsonResponse.getBoolean("success");
-              if(success){
-                Toast.makeText(getApplicationContext(), "서버연결에 성공했습니다", Toast.LENGTH_LONG).show();
-                validate = true;
-              }
-              else{
-                Toast.makeText(getApplicationContext(),"서버연결 실패!",Toast.LENGTH_LONG);
-              }
-            }
-            catch(Exception e){
-              e.printStackTrace();
-            }
-          }
-        };
-
-        ValidateMemo validateMemo = new ValidateMemo(memoString, responseListener);
-        RequestQueue queue = Volley.newRequestQueue(MyEatingPlaceMemoActivty.this);
-        queue.add(validateMemo);
-
-        Response.Listener<String> responseListener2 = new Response.Listener<String>() {
-          @Override
-          public void onResponse(String response) {
-            try{
-              JSONObject jsonResponse = new JSONObject(response);
-              boolean success = jsonResponse.getBoolean("success");
-              if(success){
-                AlertDialog.Builder builder = new AlertDialog.Builder(MyEatingPlaceMemoActivty.this);
-                dialog = builder.setMessage("메모를 저장하시겠습니까?")
-                        .setPositiveButton("확인", new DialogInterface.OnClickListener() {
-                          @Override
-                          public void onClick(DialogInterface dialog, int which) {
-                              Intent backMainIntent = new Intent(getApplicationContext(), MainActivity.class);
-                              startActivity(backMainIntent);
-                          }
-                        })
-                        .setNegativeButton("취소", new DialogInterface.OnClickListener() {
-                          @Override
-                          public void onClick(DialogInterface dialog, int which) {
-                              dialog.cancel();
-                          }
-                        })
-                        .create();
-                dialog.show();
-
-
-              }
-              else{
-                Toast.makeText(getApplicationContext(),"서버연결 실패!",Toast.LENGTH_LONG);
-              }
-            }
-            catch(Exception e){
-
-            }
-          }
-        };
-        RegisterMemo registerMemo = new RegisterMemo(memoString, memoUserLat, memoUserLon, responseListener2);
-        RequestQueue queue2 = Volley.newRequestQueue(MyEatingPlaceMemoActivty.this);
-        queue2.add(registerMemo);
+        savedMemo();
+        setRegisterQueue();
       }
-
     });
-
-
   }
+
+  public void checkServer() {
+    responseListener = new Response.Listener<String>() {
+      @Override
+      public void onResponse(String response) {
+        try {
+          JSONObject jsonResponse = new JSONObject(response);
+          boolean success = jsonResponse.getBoolean("success");
+
+          makeServerToastText(success);
+        } catch (Exception e) {
+          e.printStackTrace();
+        }
+      }
+    }
+  }
+
+  public void makeServerToastText ( boolean isConnect){
+    if (isConnect) {
+      Toast.makeText(getApplicationContext(), "서버연결에 성공했습니다", Toast.LENGTH_LONG).show();
+      validate = true;
+    } else {
+      Toast.makeText(getApplicationContext(), "서버연결 실패!", Toast.LENGTH_LONG);
+    }
+  }
+
+  public void setValidateQueue () {
+    MemoProcessing validateMemo = new MemoProcessing();
+    validateMemo.makeValidateMemo(memoString, responseListener);
+    RequestQueue validateQueue = Volley.newRequestQueue(MyEatingPlaceMemoActivty.this);
+    validateQueue.add(validateMemo);
+  }
+
+  public void setRegisterQueue () {
+    MemoProcessing registerMemo = new MemoProcessing();
+    validateMemo.makeRegisterMemo(memoString, memoUserLat, memoUserLon, responseListener);
+    RequestQueue registerQueue = Volley.newRequestQueue(MyEatingPlaceMemoActivty.this);
+    registerQueue.add(registerMemo);
+  }
+
+  public void savedMemo () {
+    responseListener = new Response.Listener<String>() {
+      @Override
+      public void onResponse(String response) {
+        try {
+          JSONObject jsonResponse = new JSONObject(response);
+          boolean success = jsonResponse.getBoolean("success");
+
+          makeMemoToastText(success);
+        } catch (Exception e) {
+        }
+      }
+    }
+  }
+  
+  public void makeMemoToastText(boolean isSuccess) {
+    if (isSuccess) {
+      AlertDialog.Builder builder = new AlertDialog.Builder(MyEatingPlaceMemoActivty.this);
+      dialog = builder.setMessage("메모를 저장하시겠습니까?")
+              .setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                  Intent backMainIntent = new Intent(getApplicationContext(), MainActivity.class);
+                  startActivity(backMainIntent);
+                }
+              })
+              .setNegativeButton("취소", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                  dialog.cancel();
+                }
+              })
+              .create();
+      dialog.show();
+    } else {
+      Toast.makeText(getApplicationContext(), "서버연결 실패!", Toast.LENGTH_LONG);
+    }
+  }
+
   @Override
   protected void onStop() {
     super.onStop();

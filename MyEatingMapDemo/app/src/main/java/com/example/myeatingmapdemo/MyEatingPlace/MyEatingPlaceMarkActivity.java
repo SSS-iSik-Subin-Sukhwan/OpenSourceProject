@@ -12,12 +12,9 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.myeatingmapdemo.R;
+import com.example.myeatingmapdemo.Values;
 import com.skt.Tmap.TMapPoint;
 import com.skt.Tmap.TMapView;
-
-import static com.example.myeatingmapdemo.Values.findMyPlaceAddress;
-import static com.example.myeatingmapdemo.Values.findMyPlaceName;
-import static com.example.myeatingmapdemo.Values.findMyPlacePoint;
 
 public class MyEatingPlaceMarkActivity extends AppCompatActivity {
 
@@ -30,6 +27,8 @@ public class MyEatingPlaceMarkActivity extends AppCompatActivity {
 
   TMapPoint initialPoint;
 
+  Values values;
+
 
 
   @Override
@@ -37,6 +36,9 @@ public class MyEatingPlaceMarkActivity extends AppCompatActivity {
 
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_my_eating_place_mark);
+
+    Intent intent = getIntent();
+    values = (Values) intent.getSerializableExtra("values");
 
 
     LinearLayout linearLayoutTmap = (LinearLayout) findViewById(R.id.mapview);
@@ -48,14 +50,14 @@ public class MyEatingPlaceMarkActivity extends AppCompatActivity {
 
     markerImage = BitmapFactory.decodeResource(this.getResources(), R.drawable.markerblack); // 중간지점의 마커로 사용할 이미지 지정
 
-    MyEatingPlaceMark.markReturn(markerImage, tMapView, findMyPlacePoint); // 검색한 위치에 마커를 뜨게 하는 메소드
+    MyEatingPlaceMark.markReturn(markerImage, tMapView, values.getPlacePoint()); // 검색한 위치에 마커를 뜨게 하는 메소드
 
     initialPoint = new TMapPoint(0,0);
 
-    address_textView.setText(findMyPlaceAddress); // 프레임 레이아웃의 제목텍스트를 검색한 위치의 이름으로 설정
-    name_textView.setText(findMyPlaceName); // 프레임 레이아웃의 주소텍스트를 검색한 위치의 주소로 설정
+    address_textView.setText(values.getPlaceAddress()); // 프레임 레이아웃의 제목텍스트를 검색한 위치의 이름으로 설정
+    name_textView.setText(values.getPlaceName()); // 프레임 레이아웃의 주소텍스트를 검색한 위치의 주소로 설정
 
-    tMapView.setCenterPoint(findMyPlacePoint.getLongitude(), findMyPlacePoint.getLatitude()); // tMapView가 보여지는 곳을 검색한 좌표로 설정함
+    tMapView.setCenterPoint(values.getPlacePoint().getLongitude(), values.getPlacePoint().getLatitude()); // tMapView가 보여지는 곳을 검색한 좌표로 설정함
 
 
     yesBtn = (Button) findViewById(R.id.yesBtn);

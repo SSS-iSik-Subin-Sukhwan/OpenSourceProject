@@ -34,18 +34,12 @@ public class CheckMyEatingPlaceActivity extends AppCompatActivity {
   private static ArrayList<String> userMemoArr = new ArrayList<>();
   private static ArrayList<String> userLatArr = new ArrayList<>();
   private static ArrayList<String> userLonArr = new ArrayList<>();
-  static Bitmap markerImage;
-  static TextView memoTextView;
-  static TextView latTextView;
-  static TextView lonTextView;
-  private static String userTotalMemo = "";
-  private static String userTotalLat = "";
-  private static String userTotalLon = "";
 
   static int i = 0;
   String data;
   static TMapView tMapView;
   static ArrayList<TMapMarkerItem> markerItem= new ArrayList<>();
+
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -54,9 +48,9 @@ public class CheckMyEatingPlaceActivity extends AppCompatActivity {
     LinearLayout linearLayoutTmap = (LinearLayout) findViewById(R.id.mapview);
     tMapView = new TMapView(this);
     linearLayoutTmap.addView(tMapView);
-    markerImage = BitmapFactory.decodeResource(this.getResources(), R.drawable.group6);
-    new BackGroundTask().execute();
 
+    addUserArr(getDBData());
+    setMark();
 
     tMapView.setOnLongClickListenerCallback(new TMapView.OnLongClickListenerCallback() {
       @Override
@@ -65,15 +59,7 @@ public class CheckMyEatingPlaceActivity extends AppCompatActivity {
           if (("markerItem" + i ) == arrayList.get(i).getID()){
               data = userMemoArr.get(i);
           }
-
-
-
-
         }
-
-
-
-
 
         Intent memoIntent = new Intent(getApplicationContext(),popupActivity.class);
         memoIntent.putExtra("data", data);
@@ -82,85 +68,13 @@ public class CheckMyEatingPlaceActivity extends AppCompatActivity {
     });
   }
 
-  static class BackGroundTask extends AsyncTask<Void, Void, String>{
-    String target;
-    @Override
-    protected  void onPreExecute(){
-      target = "http://jkey20.cafe24.com/GetUserMemo.php";
-    }
 
-    @Override
-    protected String doInBackground(Void... voids) {
-
-      try{
-        URL url = new URL(target);
-        HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
-        InputStream inputStream = httpURLConnection.getInputStream();
-        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
-        String temp;
-        StringBuilder stringBuilder = new StringBuilder();
-        while((temp = bufferedReader.readLine()) != null){
-          stringBuilder.append(temp + "\n");
-        }
-        bufferedReader.close();
-        inputStream.close();
-        httpURLConnection.disconnect();
-        return stringBuilder.toString().trim();
-
-
-
-      }catch (Exception e){
-        e.printStackTrace();
-      }
-
-
-      return null;
-    }
-    @Override
-    public void onProgressUpdate(Void... values){
-      super.onProgressUpdate();
-    }
-
-    @Override
-    public void onPostExecute(String result){
-      try{
-
-
-        JSONObject jsonObject = new JSONObject(result);
-        JSONArray jsonArray = jsonObject.getJSONArray("response");
-        int count =0;
-        String userServerMemo, userServerLat, userServerLon;
-        while(count < jsonArray.length()){
-          JSONObject object = jsonArray.getJSONObject(count);
-          userServerMemo = object.getString("userMemo");
-          userServerLat = object.getString("userLat");
-          userServerLon = object.getString("userLon");
-
-          userMemoArr.add(userServerMemo);
-          userLatArr.add(userServerLat);
-          userLonArr.add(userServerLon);
-          i++;
-          count++;
-        }
-
-
-      }catch (Exception e){
-        e.printStackTrace();
-      }
-
-      for(int k = 0; k<userMemoArr.size(); k++){
-        TMapPoint mapPoint = new TMapPoint(Double.valueOf(userLatArr.get(k)), Double.valueOf(userLonArr.get(k)));
-        userPointArr.add(mapPoint);
-      }
-      allMarkReturn();
-    }
-  }
-  public static void allMarkReturn() {
+  private void setmark() {
 
     for(int i = 0; i < userPointArr.size(); i++) {
       TMapMarkerItem markerItem = new TMapMarkerItem();
       // 마커 아이콘 지정
-      markerItem.setIcon(markerImage);
+      markerItem.setIcon(BitmapFactory.decodeResource(this.getResources(), R.drawable.group6));
 
       // 마커의 좌표 지정
       markerItem.setTMapPoint(userPointArr.get(i));
@@ -170,5 +84,55 @@ public class CheckMyEatingPlaceActivity extends AppCompatActivity {
 
     }
     tMapView.setCenterPoint(userPointArr.get(0).getLongitude(), userPointArr.get(0).getLatitude());
+  }
+
+  private String getDBData() {
+    try {
+      URL url = new URL("http://jkey20.cafe24.com/GetUserMemo.php");
+      HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+      InputStream inputStream = httpURLConnection.getInputStream();
+      BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
+
+      String temp;
+      StringBuilder stringBuilder = new StringBuilder();
+
+      while((temp = bufferedReader.readLine()) != null){
+        stringBuilder.append(temp + "\n");
+      }
+
+      bufferedReader.close();
+      inputStream.close();
+      httpURLConnection.disconnect();
+
+      return stringBuilder.toString().trim();
+    } catch (Exception e){
+      e.printStackTrace();
+    }
+    return null;
+  }
+
+  private void addUserArr(String result) {
+    try{
+      JSONObject jsonObject = new JSONObject(result);
+      JSONArray jsonArray = jsonObject.getJSONArray("response");
+      int count = 0;
+
+      while(count < jsonArray.length()){
+        JSONObject object = jsonArray.getJSONObject(count);
+
+        userMemoArr.add(object.getString("userMemo"));
+        userLatArr.add(object.getString("userLat"));
+        userLonArr.add(object.getString("userLon"));
+        i++;
+        count++;
+      }
+    } catch (Exception e){
+      e.printStackTrace();
+    }
+
+    for(int k = 0; k<userMemoArr.size(); k++){
+      TMapPoint mapPoint = new TMapPoint(Double.valueOf(userLatArr.get(k)), Double.valueOf(userLonArr.get(k)));
+      userPointArr.add(mapPoint);
+    }
   }
 }

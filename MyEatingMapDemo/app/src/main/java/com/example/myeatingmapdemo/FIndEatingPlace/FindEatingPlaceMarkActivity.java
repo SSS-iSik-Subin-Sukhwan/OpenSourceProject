@@ -12,10 +12,10 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.myeatingmapdemo.CurrentPlaceValues;
 import com.example.myeatingmapdemo.MainActivity;
 import com.example.myeatingmapdemo.MyEatingPlace.MyEatingPlaceMark;
 import com.example.myeatingmapdemo.R;
-import com.example.myeatingmapdemo.Values;
 import com.skt.Tmap.TMapData;
 import com.skt.Tmap.TMapPOIItem;
 import com.skt.Tmap.TMapPoint;
@@ -41,7 +41,7 @@ public class FindEatingPlaceMarkActivity extends AppCompatActivity {
   public static double[] foodLon = new double[21];
   public static int foodSize = 0;
 
-  Values values;
+  CurrentPlaceValues values;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -50,7 +50,7 @@ public class FindEatingPlaceMarkActivity extends AppCompatActivity {
     setContentView(R.layout.activity_my_eating_place_mark);
 
     Intent intent = getIntent();
-    values = (Values) intent.getSerializableExtra("values");
+    values = (CurrentPlaceValues) intent.getSerializableExtra("values");
 
 
     LinearLayout linearLayoutTmap = (LinearLayout) findViewById(R.id.mapview);

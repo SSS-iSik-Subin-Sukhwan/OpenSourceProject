@@ -16,11 +16,11 @@ import java.util.ArrayList;
 public class FindAddress {
 
     private final Context context;
-    Values values;
+    ListPlaceValues listValues;
 
     public FindAddress(Context context){
         this.context=context;
-        values = new Values();
+        listValues = new ListPlaceValues();
     }
 
     public void  findRestaurantAddress(final int num){
@@ -72,15 +72,15 @@ public class FindAddress {
         for (int i = 0; i < poi.size(); i++) {
             TMapPOIItem item = poi.get(i);
 
-            values.setPlaceFindPOIResult(item.getPOIName(), i);
-            values.setPlaceFindAddressResult(item.getPOIAddress().replace("null", ""), i);
-            values.setPlaceFindPOILat(item.getPOIPoint().getLatitude(), i);
-            values.setPlaceFindPOILon(item.getPOIPoint().getLongitude(), i);
-            values.setPlacePOIItemSize(poi.size());
+            listValues.setPlaceFindPOIResult(i, item.getPOIName());
+            listValues.setPlaceFindAddressResult(i, item.getPOIAddress().replace("null", ""));
+            listValues.setPlaceFindPOILat(i, item.getPOIPoint().getLatitude());
+            listValues.setPlaceFindPOILon(i, item.getPOIPoint().getLongitude());
+            listValues.setPlacePOIItemSize(poi.size());
         }
 
         Intent ListViewIntent = new Intent(context, PlaceListView.class);
-        ListViewIntent.putExtra("values", values);
+        ListViewIntent.putExtra("listValues", listValues);
 
         if(num == 1) ListViewIntent.putExtra("kind", "My");
         else ListViewIntent.putExtra("kind", "Find");

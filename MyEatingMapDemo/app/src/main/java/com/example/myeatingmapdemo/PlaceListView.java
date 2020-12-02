@@ -9,15 +9,12 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.example.myeatingmapdemo.FIndEatingPlace.FindEatingPlaceMarkActivity;
-import com.example.myeatingmapdemo.ListViewAdapter;
 import com.example.myeatingmapdemo.MyEatingPlace.MyEatingPlaceMarkActivity;
-import com.example.myeatingmapdemo.R;
-import com.example.myeatingmapdemo.Values;
 import com.skt.Tmap.TMapPoint;
 
 public class PlaceListView extends AppCompatActivity {
     private ListViewAdapter listViewAdapter;
-    private Values values;
+    private ListPlaceValues listValues;
     private String kind;
 
     @Override
@@ -32,15 +29,15 @@ public class PlaceListView extends AppCompatActivity {
         AddressListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                setValues(position);
-                gotoMarkActivity();
+                CurrentPlaceValues values = setValues(position);
+                gotoMarkActivity(values);
             }
         });
     }
 
     private void getDataByIntent() {
         Intent intent = getIntent();
-        values = (Values) intent.getSerializableExtra("values");
+        listValues = (ListPlaceValues) intent.getSerializableExtra("listValues");
         kind = intent.getExtras().getString("kind");
     }
 
@@ -56,19 +53,22 @@ public class PlaceListView extends AppCompatActivity {
     }
 
     private void adapterAddItem() {
-        for (int i=0;i<values.getPlacePOIItemSize(); i++) {
-            listViewAdapter.addItem(values.getPlaceFindPOIResult()[i], values.getPlaceFindAddressResult()[i],
-                    values.getPlaceFindPOILat()[i], values.getPlaceFindPOILon()[i]);
+        for (int i=0;i<listValues.getPlacePOIItemSize(); i++) {
+            listViewAdapter.addItem(listValues.getPlaceFindPOIResult(i), listValues.getPlaceFindAddressResult(i),
+                    listValues.getPlaceFindPOILat(i), listValues.getPlaceFindPOILon(i));
         }
     }
 
-    private void setValues(int position) {
-        values.setPlacePoint(new TMapPoint(values.getPlaceFindPOILat()[position], values.getPlaceFindPOILon()[position]));
-        values.setPlaceName(values.getPlaceFindPOIResult()[position]);
-        values.setPlaceAddress(values.getPlaceFindAddressResult()[position]);
+    private CurrentPlaceValues setValues(int position) {
+        CurrentPlaceValues values = new CurrentPlaceValues();
+        values.setPlacePoint(new TMapPoint(listValues.getPlaceFindPOILat(position), listValues.getPlaceFindPOILon(position)));
+        values.setPlaceName(listValues.getPlaceFindPOIResult(position));
+        values.setPlaceAddress(listValues.getPlaceFindAddressResult(position));
+
+        return values;
     }
 
-    private void gotoMarkActivity() {
+    private void gotoMarkActivity(CurrentPlaceValues values) {
         Intent MarkIntent;
         if(kind.equals("My")) {
             MarkIntent = new Intent(getApplicationContext(), MyEatingPlaceMarkActivity.class);

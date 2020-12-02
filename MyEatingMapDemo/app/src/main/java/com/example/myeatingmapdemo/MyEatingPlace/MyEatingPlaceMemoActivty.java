@@ -14,11 +14,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.toolbox.Volley;
+import com.example.myeatingmapdemo.CurrentPlaceValues;
 import com.example.myeatingmapdemo.MainActivity;
 import com.example.myeatingmapdemo.R;
 import com.example.myeatingmapdemo.RegisterMemo;
 import com.example.myeatingmapdemo.ValidateMemo;
-import com.example.myeatingmapdemo.Values;
 
 import org.json.JSONObject;
 
@@ -29,7 +29,7 @@ public class MyEatingPlaceMemoActivty extends AppCompatActivity {
   private boolean validate = false;
   private AlertDialog dialog;
   String memoString;
-  Values values;
+  CurrentPlaceValues values;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -37,7 +37,7 @@ public class MyEatingPlaceMemoActivty extends AppCompatActivity {
     setContentView(R.layout.activity_my_eating_place_memo_activty);
 
     Intent intent = getIntent();
-    values = (Values) intent.getSerializableExtra("values");
+    values = (CurrentPlaceValues) intent.getSerializableExtra("values");
 
     memoUserLat = String.valueOf(values.getPlacePoint().getLatitude());
     memoUserLon = String.valueOf(values.getPlacePoint().getLongitude());

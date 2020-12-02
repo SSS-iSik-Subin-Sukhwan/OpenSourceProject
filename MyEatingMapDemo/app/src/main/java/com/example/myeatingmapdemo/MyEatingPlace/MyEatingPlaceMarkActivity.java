@@ -11,8 +11,8 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.myeatingmapdemo.CurrentPlaceValues;
 import com.example.myeatingmapdemo.R;
-import com.example.myeatingmapdemo.Values;
 import com.skt.Tmap.TMapPoint;
 import com.skt.Tmap.TMapView;
 
@@ -27,7 +27,7 @@ public class MyEatingPlaceMarkActivity extends AppCompatActivity {
 
   TMapPoint initialPoint;
 
-  Values values;
+  CurrentPlaceValues values;
 
 
 
@@ -38,7 +38,7 @@ public class MyEatingPlaceMarkActivity extends AppCompatActivity {
     setContentView(R.layout.activity_my_eating_place_mark);
 
     Intent intent = getIntent();
-    values = (Values) intent.getSerializableExtra("values");
+    values = (CurrentPlaceValues) intent.getSerializableExtra("values");
 
 
     LinearLayout linearLayoutTmap = (LinearLayout) findViewById(R.id.mapview);

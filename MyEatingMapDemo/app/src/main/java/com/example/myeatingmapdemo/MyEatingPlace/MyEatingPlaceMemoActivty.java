@@ -21,12 +21,10 @@ import com.example.myeatingmapdemo.MemoProcessing;
 
 import org.json.JSONObject;
 
-import static com.example.myeatingmapdemo.Values.findMyPlacePoint;
-
 public class MyEatingPlaceMemoActivty extends AppCompatActivity {
 
-  private String memoUserLat = String.valueOf(findMyPlacePoint.getLatitude());
-  private String memoUserLon = String.valueOf(findMyPlacePoint.getLongitude());
+  private String memoUserLat;
+  private String memoUserLon;
   private boolean validate = false;
   private AlertDialog dialog;
   private Response.Listener<String> responseListener;
@@ -79,7 +77,7 @@ public class MyEatingPlaceMemoActivty extends AppCompatActivity {
           e.printStackTrace();
         }
       }
-    }
+    };
   }
 
   public void makeServerToastText ( boolean isConnect){
@@ -92,15 +90,15 @@ public class MyEatingPlaceMemoActivty extends AppCompatActivity {
   }
 
   public void setValidateQueue () {
-    MemoProcessing validateMemo = new MemoProcessing();
+    MemoProcessing validateMemo = new MemoProcessing(responseListener);
     validateMemo.makeValidateMemo(memoString, responseListener);
     RequestQueue validateQueue = Volley.newRequestQueue(MyEatingPlaceMemoActivty.this);
     validateQueue.add(validateMemo);
   }
 
   public void setRegisterQueue () {
-    MemoProcessing registerMemo = new MemoProcessing();
-    validateMemo.makeRegisterMemo(memoString, memoUserLat, memoUserLon, responseListener);
+    MemoProcessing registerMemo = new MemoProcessing(responseListener);
+    registerMemo.makeRegisterMemo(memoString, memoUserLat, memoUserLon, responseListener);
     RequestQueue registerQueue = Volley.newRequestQueue(MyEatingPlaceMemoActivty.this);
     registerQueue.add(registerMemo);
   }
@@ -117,7 +115,7 @@ public class MyEatingPlaceMemoActivty extends AppCompatActivity {
         } catch (Exception e) {
         }
       }
-    }
+    };
   }
   
   public void makeMemoToastText(boolean isSuccess) {

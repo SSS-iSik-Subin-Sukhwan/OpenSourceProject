@@ -23,24 +23,24 @@ import org.json.JSONObject;
 
 public class MyEatingPlaceMemoActivty extends AppCompatActivity {
 
+  private Response.Listener<String> responseListener;
+  private AlertDialog dialog;
+  private CurrentPlaceValues values;
+
   private String memoUserLat;
   private String memoUserLon;
+  private String memoString;
+
   private boolean validate = false;
-  private AlertDialog dialog;
-  private Response.Listener<String> responseListener;
-  String memoString;
-  
-  CurrentPlaceValues values;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    setContentView(R.layout.activity_my_eating_place_memo_activty);
-    Intent intent = getIntent();
-    values = (CurrentPlaceValues) intent.getSerializableExtra("values");
 
-    memoUserLat = String.valueOf(values.getPlacePoint().getLatitude());
-    memoUserLon = String.valueOf(values.getPlacePoint().getLongitude());
+    setContentView(R.layout.activity_my_eating_place_memo_activty);
+
+    getDataByIntent();
+    getGeographicPointByString();
 
     Button completeMemoBtn = (Button)findViewById(R.id.memocompletebtn);
     final EditText memoEditText = (EditText)findViewById(R.id.memoEdit);
@@ -48,7 +48,6 @@ public class MyEatingPlaceMemoActivty extends AppCompatActivity {
     completeMemoBtn.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View v) {
-
         memoString = memoEditText.getText().toString();
 
         if (validate) {
@@ -56,7 +55,7 @@ public class MyEatingPlaceMemoActivty extends AppCompatActivity {
         }
 
         checkServer();
-        setValidateQueue();
+        //setValidateQueue();
 
         savedMemo();
         setRegisterQueue();
@@ -64,20 +63,36 @@ public class MyEatingPlaceMemoActivty extends AppCompatActivity {
     });
   }
 
+  private void getDataByIntent() {
+    Intent intent = getIntent();
+    values = (CurrentPlaceValues) intent.getSerializableExtra("values");
+  }
+
+  private void getGeographicPointByString() {
+    memoUserLat = String.valueOf(values.getPlacePoint().getLatitude());
+    memoUserLon = String.valueOf(values.getPlacePoint().getLongitude());
+  }
+
   public void checkServer() {
+    System.out.println("Start");
     responseListener = new Response.Listener<String>() {
       @Override
       public void onResponse(String response) {
+        System.out.println("OnResponse");
         try {
+          System.out.println(response);
           JSONObject jsonResponse = new JSONObject(response);
           boolean success = jsonResponse.getBoolean("success");
+          System.out.println(success);
 
           makeServerToastText(success);
         } catch (Exception e) {
+          System.out.println("Exception");
           e.printStackTrace();
         }
       }
     };
+    System.out.println("End");
   }
 
   public void makeServerToastText ( boolean isConnect){
@@ -90,15 +105,19 @@ public class MyEatingPlaceMemoActivty extends AppCompatActivity {
   }
 
   public void setValidateQueue () {
-    MemoProcessing validateMemo = new MemoProcessing(responseListener);
-    validateMemo.makeValidateMemo(memoString, responseListener);
+    String URL = "http://jkey20.cafe24.com/UserMemoCheck.php";
+    MemoProcessing validateMemo = new MemoProcessing(URL, responseListener);
+    System.out.println(validateMemo.toString());
+    validateMemo.makeValidateMemo(memoString);
     RequestQueue validateQueue = Volley.newRequestQueue(MyEatingPlaceMemoActivty.this);
     validateQueue.add(validateMemo);
   }
 
   public void setRegisterQueue () {
-    MemoProcessing registerMemo = new MemoProcessing(responseListener);
-    registerMemo.makeRegisterMemo(memoString, memoUserLat, memoUserLon, responseListener);
+    String URL = "http://jkey20.cafe24.com/UserMemo.php";
+    MemoProcessing registerMemo = new MemoProcessing(URL, responseListener);
+    System.out.println(registerMemo.toString());
+    registerMemo.makeRegisterMemo(memoString, memoUserLat, memoUserLon);
     RequestQueue registerQueue = Volley.newRequestQueue(MyEatingPlaceMemoActivty.this);
     registerQueue.add(registerMemo);
   }

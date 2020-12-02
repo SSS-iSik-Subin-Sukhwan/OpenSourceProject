@@ -65,9 +65,8 @@ public class MyEatingPlaceMarkActivity extends AppCompatActivity {
     yesBtn.setOnClickListener(new Button.OnClickListener() {
       @Override
       public void onClick(View view) {
-
-
         Intent MemoIntent = new Intent(getApplicationContext(), MyEatingPlaceMemoActivty.class);
+        MemoIntent.putExtra("values", values);
         startActivity(MemoIntent);
 
       }

@@ -1,4 +1,4 @@
-package com.example.myeatingmapdemo.FIndEatingPlace;
+package com.example.myeatingmapdemo.FIndRestaurant;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -30,14 +30,14 @@ import java.util.Map;
 
 import javax.xml.parsers.ParserConfigurationException;
 
-import static com.example.myeatingmapdemo.FIndEatingPlace.FindEatingPlaceMarkActivity.foodAddress;
-import static com.example.myeatingmapdemo.FIndEatingPlace.FindEatingPlaceMarkActivity.foodLat;
-import static com.example.myeatingmapdemo.FIndEatingPlace.FindEatingPlaceMarkActivity.foodList;
-import static com.example.myeatingmapdemo.FIndEatingPlace.FindEatingPlaceMarkActivity.foodLon;
-import static com.example.myeatingmapdemo.FIndEatingPlace.FindEatingPlaceMarkActivity.foodSize;
-import static com.example.myeatingmapdemo.FIndEatingPlace.FindEatingPlaceMarkActivity.foodTMapPoint;
+import static com.example.myeatingmapdemo.FIndRestaurant.FindRestaurantMarkActivity.foodAddress;
+import static com.example.myeatingmapdemo.FIndRestaurant.FindRestaurantMarkActivity.foodLat;
+import static com.example.myeatingmapdemo.FIndRestaurant.FindRestaurantMarkActivity.foodList;
+import static com.example.myeatingmapdemo.FIndRestaurant.FindRestaurantMarkActivity.foodLon;
+import static com.example.myeatingmapdemo.FIndRestaurant.FindRestaurantMarkActivity.foodSize;
+import static com.example.myeatingmapdemo.FIndRestaurant.FindRestaurantMarkActivity.foodTMapPoint;
 
-public class FindEatingPlaceResultViewActivity extends AppCompatActivity {
+public class FindRestaurantResultViewActivity extends AppCompatActivity {
   boolean updateListview = false;
   static ListViewAdapter foodListAdapter = new ListViewAdapter();
   @Override

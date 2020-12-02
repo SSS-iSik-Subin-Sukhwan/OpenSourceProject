@@ -8,7 +8,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
-import com.example.myeatingmapdemo.FIndEatingPlace.FindEatingPlaceMarkActivity;
+import com.example.myeatingmapdemo.FIndRestaurant.FindRestaurantMarkActivity;
 import com.example.myeatingmapdemo.MyEatingPlace.MyEatingPlaceMarkActivity;
 import com.skt.Tmap.TMapPoint;
 
@@ -74,7 +74,7 @@ public class PlaceListView extends AppCompatActivity {
             MarkIntent = new Intent(getApplicationContext(), MyEatingPlaceMarkActivity.class);
         }
         else {
-            MarkIntent = new Intent(getApplicationContext(), FindEatingPlaceMarkActivity.class);
+            MarkIntent = new Intent(getApplicationContext(), FindRestaurantMarkActivity.class);
         }
 
         MarkIntent.putExtra("values", values);

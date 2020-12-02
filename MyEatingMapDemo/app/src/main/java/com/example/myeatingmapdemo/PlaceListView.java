@@ -61,6 +61,7 @@ public class PlaceListView extends AppCompatActivity {
 
     private CurrentPlaceValues setValues(int position) {
         CurrentPlaceValues values = new CurrentPlaceValues();
+
         values.setPlacePoint(new TMapPoint(listValues.getPlaceFindPOILat(position), listValues.getPlaceFindPOILon(position)));
         values.setPlaceName(listValues.getPlaceFindPOIResult(position));
         values.setPlaceAddress(listValues.getPlaceFindAddressResult(position));

@@ -17,8 +17,6 @@ public class CurrentPlaceValues implements Serializable {
         placeAddress = new String();
     }
 
-    public double getPlaceLatitude() { return placeLatitude; }
-    public double getPlaceLongitude() { return placeLongitude; }
     public TMapPoint getPlacePoint() {
         TMapPoint point = new TMapPoint(placeLatitude, placeLongitude);
         return point;

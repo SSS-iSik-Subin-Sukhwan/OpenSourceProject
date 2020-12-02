@@ -36,6 +36,7 @@ public class MarkMyRestaurantActivity extends AppCompatActivity {
   String data;
   static TMapView tMapView;
   static ArrayList<TMapMarkerItem> markerItem= new ArrayList<>();
+  String DBdata;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -46,14 +47,19 @@ public class MarkMyRestaurantActivity extends AppCompatActivity {
     tMapView = new TMapView(this);
     linearLayoutTmap.addView(tMapView);
 
-    addUserArr(getDBData());
-    setMark();
+    new Thread() {
+      public void run() {
+        DBdata = getDBData();
+        addUserArr(DBdata);
+        setMark();
+      }
+    }.start();
 
     tMapView.setOnLongClickListenerCallback(new TMapView.OnLongClickListenerCallback() {
       @Override
       public void onLongPressEvent(ArrayList<TMapMarkerItem> arrayList, ArrayList<TMapPOIItem> arrayList1, TMapPoint tMapPoint) {
         for(int i = 0; i< userPointArr.size(); i++) {
-          if (("markerItem" + i ) == arrayList.get(i).getID()){
+          if (("markerItem" + i ).equals(arrayList.get(0).getID())){
               data = userMemoArr.get(i);
           }
         }
@@ -86,6 +92,7 @@ public class MarkMyRestaurantActivity extends AppCompatActivity {
   private String getDBData() {
     try {
       URL url = new URL("http://jkey20.cafe24.com/GetUserMemo.php");
+
       HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
       InputStream inputStream = httpURLConnection.getInputStream();
       BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
@@ -105,6 +112,7 @@ public class MarkMyRestaurantActivity extends AppCompatActivity {
     } catch (Exception e){
       e.printStackTrace();
     }
+
     return null;
   }
 

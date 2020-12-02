@@ -12,9 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <activity android:name=".CheckMyEatingPlace.popupActivity" android:theme="@android:style/Theme.Dialog" />
+        <activity android:name=".MarkMyRestaurant.popupActivity" android:theme="@android:style/Theme.Dialog" />
 
-        <activity android:name=".CheckMyEatingPlace.CheckMyEatingPlaceActivity" />
+        <activity android:name=".MarkMyRestaurant.MarkMyRestaurantActivity" />
         <activity android:name=".FIndRestaurant.FindRestaurantResultViewActivity" />
         <activity android:name=".MyEatingPlace.MyEatingPlaceMemoActivty" />
         <activity android:name=".MyEatingPlace.MyEatingPlaceMarkActivity" />

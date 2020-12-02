@@ -1,15 +1,12 @@
-package com.example.myeatingmapdemo.CheckMyEatingPlace;
+package com.example.myeatingmapdemo.MarkMyRestaurant;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.widget.LinearLayout;
 //import android.widget.Linearlayout;
-import android.widget.TextView;
 
 import com.example.myeatingmapdemo.R;
 import com.skt.Tmap.TMapMarkerItem;
@@ -29,7 +26,7 @@ import java.util.ArrayList;
 
 //import static com.example.myeatingmapdemo.array_saving_class.alTMapPoint;
 
-public class CheckMyEatingPlaceActivity extends AppCompatActivity {
+public class MarkMyRestaurantActivity extends AppCompatActivity {
   private static ArrayList<TMapPoint> userPointArr = new ArrayList<>();
   private static ArrayList<String> userMemoArr = new ArrayList<>();
   private static ArrayList<String> userLatArr = new ArrayList<>();

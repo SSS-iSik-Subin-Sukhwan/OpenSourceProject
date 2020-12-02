@@ -1,6 +1,4 @@
-package com.example.myeatingmapdemo.CheckMyEatingPlace;
-
-import androidx.appcompat.app.AppCompatActivity;
+package com.example.myeatingmapdemo.MarkMyRestaurant;
 
 import android.app.Activity;
 import android.content.Intent;

@@ -68,7 +68,7 @@ public class FindAddress {
         addressSearchBuilder1.show();
     }
 
-    public void switchPoiList(int num,final ArrayList<TMapPOIItem> poi) {
+    public void createPoiList(int num,final ArrayList<TMapPOIItem> poi) {
         for (int i = 0; i < poi.size(); i++) {
             TMapPOIItem item = poi.get(i);
 

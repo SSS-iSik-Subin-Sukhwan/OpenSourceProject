@@ -69,7 +69,7 @@ public class CheckMyEatingPlaceActivity extends AppCompatActivity {
   }
 
 
-  private void setmark() {
+  private void setMark() {
 
     for(int i = 0; i < userPointArr.size(); i++) {
       TMapMarkerItem markerItem = new TMapMarkerItem();

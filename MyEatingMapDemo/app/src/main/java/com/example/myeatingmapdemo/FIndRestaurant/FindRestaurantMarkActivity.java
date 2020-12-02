@@ -1,4 +1,4 @@
-package com.example.myeatingmapdemo.FIndEatingPlace;
+package com.example.myeatingmapdemo.FIndRestaurant;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -23,7 +23,7 @@ import com.skt.Tmap.TMapView;
 
 import java.util.ArrayList;
 
-public class FindEatingPlaceMarkActivity extends AppCompatActivity {
+public class FindRestaurantMarkActivity extends AppCompatActivity {
 
   TMapView tMapView;
   TextView address_textView;
@@ -86,7 +86,7 @@ public class FindEatingPlaceMarkActivity extends AppCompatActivity {
           public void onFindAroundNamePOI(ArrayList<TMapPOIItem> POI_item) {
             if (POI_item == null) { // 주변시설을 검색할 수 없을 때
 
-              Toast.makeText(FindEatingPlaceMarkActivity.this, "반경 1km 이내에 음식점이 없습니다!", Toast.LENGTH_LONG).show();
+              Toast.makeText(FindRestaurantMarkActivity.this, "반경 1km 이내에 음식점이 없습니다!", Toast.LENGTH_LONG).show();
 
               Intent backMainIntent = new Intent(getApplicationContext(), MainActivity.class);
               startActivity(backMainIntent);
@@ -109,7 +109,7 @@ public class FindEatingPlaceMarkActivity extends AppCompatActivity {
         });
 
 
-        Intent MemoIntent = new Intent(getApplicationContext(), FindEatingPlaceResultViewActivity.class);
+        Intent MemoIntent = new Intent(getApplicationContext(), FindRestaurantResultViewActivity.class);
         startActivity(MemoIntent);
 
       }

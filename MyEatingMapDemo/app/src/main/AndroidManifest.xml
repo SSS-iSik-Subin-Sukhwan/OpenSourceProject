@@ -15,10 +15,10 @@
         <activity android:name=".CheckMyEatingPlace.popupActivity" android:theme="@android:style/Theme.Dialog" />
 
         <activity android:name=".CheckMyEatingPlace.CheckMyEatingPlaceActivity" />
-        <activity android:name=".FIndEatingPlace.FindEatingPlaceResultViewActivity" />
+        <activity android:name=".FIndRestaurant.FindRestaurantResultViewActivity" />
         <activity android:name=".MyEatingPlace.MyEatingPlaceMemoActivty" />
         <activity android:name=".MyEatingPlace.MyEatingPlaceMarkActivity" />
-        <activity android:name=".FIndEatingPlace.FindEatingPlaceMarkActivity" />
+        <activity android:name=".FIndRestaurant.FindRestaurantMarkActivity" />
         <activity android:name=".PlaceListView" />
         <activity android:name=".MainActivity">
             <intent-filter>

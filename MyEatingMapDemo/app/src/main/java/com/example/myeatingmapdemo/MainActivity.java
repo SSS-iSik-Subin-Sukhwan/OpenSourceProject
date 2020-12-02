@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import com.example.myeatingmapdemo.CheckMyEatingPlace.CheckMyEatingPlaceActivity;
 import com.skt.Tmap.TMapView;
@@ -22,8 +21,8 @@ public class MainActivity extends AppCompatActivity{
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
 
-    TMapView tMapView = new TMapView(this); // key값 설정을 위한 tmapView 생성
-    tMapView.setSKTMapApiKey( "dd8c0503-c4c7-42fa-87ed-5a0bb98ea44c" ); // api key 설정
+    TMapView tMapView = new TMapView(this);
+    tMapView.setSKTMapApiKey( "dd8c0503-c4c7-42fa-87ed-5a0bb98ea44c" );
 
     Button myEatingPlaceMemoBtn = (Button)findViewById(R.id.AddMyEatingPlaceBtn);
     Button findEatingPlaceBtn = (Button)findViewById(R.id.FindEatingPlaceBtn);
@@ -32,7 +31,6 @@ public class MainActivity extends AppCompatActivity{
     myEatingPlaceMemoBtn.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View v) {
-       //findMyEatingPlaceAddress();
         _address.findRestaurantAddress(1);
 
       }
@@ -42,7 +40,6 @@ public class MainActivity extends AppCompatActivity{
       @Override
       public void onClick(View v) {
         _address.findRestaurantAddress(2);
-        //findEatingPlaceAddress();
 
       }
     });

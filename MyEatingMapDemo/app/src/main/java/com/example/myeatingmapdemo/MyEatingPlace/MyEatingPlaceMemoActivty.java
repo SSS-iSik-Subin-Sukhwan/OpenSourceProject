@@ -14,9 +14,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.toolbox.Volley;
+import com.example.myeatingmapdemo.CurrentPlaceValues;
 import com.example.myeatingmapdemo.MainActivity;
 import com.example.myeatingmapdemo.R;
 import com.example.myeatingmapdemo.MemoProcessing;
+
 import org.json.JSONObject;
 
 import static com.example.myeatingmapdemo.Values.findMyPlacePoint;
@@ -29,11 +31,18 @@ public class MyEatingPlaceMemoActivty extends AppCompatActivity {
   private AlertDialog dialog;
   private Response.Listener<String> responseListener;
   String memoString;
+  
+  CurrentPlaceValues values;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_my_eating_place_memo_activty);
+    Intent intent = getIntent();
+    values = (CurrentPlaceValues) intent.getSerializableExtra("values");
+
+    memoUserLat = String.valueOf(values.getPlacePoint().getLatitude());
+    memoUserLon = String.valueOf(values.getPlacePoint().getLongitude());
 
     Button completeMemoBtn = (Button)findViewById(R.id.memocompletebtn);
     final EditText memoEditText = (EditText)findViewById(R.id.memoEdit);

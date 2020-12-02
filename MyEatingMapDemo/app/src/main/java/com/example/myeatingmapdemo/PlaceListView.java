@@ -16,49 +16,68 @@ import com.example.myeatingmapdemo.Values;
 import com.skt.Tmap.TMapPoint;
 
 public class PlaceListView extends AppCompatActivity {
-    static ListViewAdapter listViewAdapter;
-    Values values;
-    String kind;
+    private ListViewAdapter listViewAdapter;
+    private Values values;
+    private String kind;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        Intent intent = getIntent();
-        values = (Values) intent.getSerializableExtra("values");
-        kind = intent.getExtras().getString("kind");
+        getDataByIntent();
 
         setContentView(R.layout.activity_list_view);
-        final ListView AddressListView;
-
-        listViewAdapter = new ListViewAdapter();
-
-        AddressListView = (ListView) findViewById(R.id.Addresslistview);
-        AddressListView.setAdapter(listViewAdapter); // 리스트뷰에 어답터 연결
-
-        for (int i = 0; i < values.getPlacePOIItemSize(); i++) {
-            listViewAdapter.addItem(values.getPlaceFindAddressResult()[i], values.getPlaceFindAddressResult()[i],
-                    values.getPlaceFindPOILat()[i], values.getPlaceFindPOILon()[i]);
-        }
+        ListView AddressListView = setAdapter();
 
         AddressListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) { //리스트뷰를 클릭했을때
-
-                values.setPlacePoint(new TMapPoint(values.getPlaceFindPOILat()[position], values.getPlaceFindPOILon()[position]));
-                values.setPlaceName(values.getPlaceFindPOIResult()[position]);
-                values.setPlaceAddress(values.getPlaceFindAddressResult()[position]);
-
-                Intent MarkIntent;
-                if(kind.equals("My")) {
-                    MarkIntent = new Intent(getApplicationContext(), MyEatingPlaceMarkActivity.class); //검색한 위치를 띄우는 화면으로 보낸다.
-                }
-                else {
-                    MarkIntent = new Intent(getApplicationContext(), FindEatingPlaceMarkActivity.class); //검색한 위치를 띄우는 화면으로 보낸다.
-                }
-                MarkIntent.putExtra("values", values);
-                startActivity(MarkIntent);
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                setValues(position);
+                gotoMarkActivity();
             }
         });
+    }
+
+    private void getDataByIntent() {
+        Intent intent = getIntent();
+        values = (Values) intent.getSerializableExtra("values");
+        kind = intent.getExtras().getString("kind");
+    }
+
+    private ListView setAdapter() {
+        listViewAdapter = new ListViewAdapter();
+
+        ListView AddressListView = (ListView) findViewById(R.id.Addresslistview);
+        AddressListView.setAdapter(listViewAdapter);
+
+        adapterAddItem();
+
+        return AddressListView;
+    }
+
+    private void adapterAddItem() {
+        for (int i=0;i<values.getPlacePOIItemSize(); i++) {
+            listViewAdapter.addItem(values.getPlaceFindPOIResult()[i], values.getPlaceFindAddressResult()[i],
+                    values.getPlaceFindPOILat()[i], values.getPlaceFindPOILon()[i]);
+        }
+    }
+
+    private void setValues(int position) {
+        values.setPlacePoint(new TMapPoint(values.getPlaceFindPOILat()[position], values.getPlaceFindPOILon()[position]));
+        values.setPlaceName(values.getPlaceFindPOIResult()[position]);
+        values.setPlaceAddress(values.getPlaceFindAddressResult()[position]);
+    }
+
+    private void gotoMarkActivity() {
+        Intent MarkIntent;
+        if(kind.equals("My")) {
+            MarkIntent = new Intent(getApplicationContext(), MyEatingPlaceMarkActivity.class);
+        }
+        else {
+            MarkIntent = new Intent(getApplicationContext(), FindEatingPlaceMarkActivity.class);
+        }
+
+        MarkIntent.putExtra("values", values);
+        startActivity(MarkIntent);
     }
 }

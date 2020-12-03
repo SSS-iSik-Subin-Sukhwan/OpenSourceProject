@@ -14,10 +14,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.toolbox.Volley;
-import com.example.myeatingmapdemo.Values.CurrentPlaceValues;
+import com.example.myeatingmapdemo.CurrentPlaceValues;
 import com.example.myeatingmapdemo.MainActivity;
 import com.example.myeatingmapdemo.R;
-import com.example.myeatingmapdemo.MemoProcessing;
+import com.example.myeatingmapdemo.RegisterMemo;
 
 import org.json.JSONObject;
 
@@ -50,13 +50,9 @@ public class MyEatingPlaceMemoActivty extends AppCompatActivity {
       public void onClick(View v) {
         memoString = memoEditText.getText().toString();
 
-        if (validate) {
-          return;
-        }
+        if (validate) return;
 
         checkServer();
-        //setValidateQueue();
-
         savedMemo();
         setRegisterQueue();
       }
@@ -74,28 +70,22 @@ public class MyEatingPlaceMemoActivty extends AppCompatActivity {
   }
 
   public void checkServer() {
-    System.out.println("Start");
     responseListener = new Response.Listener<String>() {
       @Override
       public void onResponse(String response) {
-        System.out.println("OnResponse");
         try {
-          System.out.println(response);
           JSONObject jsonResponse = new JSONObject(response);
           boolean success = jsonResponse.getBoolean("success");
-          System.out.println(success);
 
-          makeServerToastText(success);
+          makeToastText(success);
         } catch (Exception e) {
-          System.out.println("Exception");
           e.printStackTrace();
         }
       }
     };
-    System.out.println("End");
   }
 
-  public void makeServerToastText ( boolean isConnect){
+  public void makeToastText ( boolean isConnect){
     if (isConnect) {
       Toast.makeText(getApplicationContext(), "서버연결에 성공했습니다", Toast.LENGTH_LONG).show();
       validate = true;
@@ -104,20 +94,10 @@ public class MyEatingPlaceMemoActivty extends AppCompatActivity {
     }
   }
 
-  public void setValidateQueue () {
-    String URL = "http://jkey20.cafe24.com/UserMemoCheck.php";
-    MemoProcessing validateMemo = new MemoProcessing(URL, responseListener);
-    System.out.println(validateMemo.toString());
-    validateMemo.makeValidateMemo(memoString);
-    RequestQueue validateQueue = Volley.newRequestQueue(MyEatingPlaceMemoActivty.this);
-    validateQueue.add(validateMemo);
-  }
-
   public void setRegisterQueue () {
-    String URL = "http://jkey20.cafe24.com/UserMemo.php";
-    MemoProcessing registerMemo = new MemoProcessing(URL, responseListener);
-    System.out.println(registerMemo.toString());
+    RegisterMemo registerMemo = new RegisterMemo(responseListener);
     registerMemo.makeRegisterMemo(memoString, memoUserLat, memoUserLon);
+
     RequestQueue registerQueue = Volley.newRequestQueue(MyEatingPlaceMemoActivty.this);
     registerQueue.add(registerMemo);
   }
@@ -130,14 +110,14 @@ public class MyEatingPlaceMemoActivty extends AppCompatActivity {
           JSONObject jsonResponse = new JSONObject(response);
           boolean success = jsonResponse.getBoolean("success");
 
-          makeMemoToastText(success);
+          makeDialog(success);
         } catch (Exception e) {
         }
       }
     };
   }
   
-  public void makeMemoToastText(boolean isSuccess) {
+  public void makeDialog(boolean isSuccess) {
     if (isSuccess) {
       AlertDialog.Builder builder = new AlertDialog.Builder(MyEatingPlaceMemoActivty.this);
       dialog = builder.setMessage("메모를 저장하시겠습니까?")

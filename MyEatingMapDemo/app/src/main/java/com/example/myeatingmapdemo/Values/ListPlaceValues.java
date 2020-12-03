@@ -1,4 +1,4 @@
-package com.example.myeatingmapdemo;
+package com.example.myeatingmapdemo.Values;
 
 import java.io.Serializable;
 

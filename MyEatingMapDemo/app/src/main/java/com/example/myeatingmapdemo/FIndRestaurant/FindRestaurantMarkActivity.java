@@ -12,7 +12,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.myeatingmapdemo.CurrentPlaceValues;
+import com.example.myeatingmapdemo.Values.CurrentPlaceValues;
 import com.example.myeatingmapdemo.MainActivity;
 import com.example.myeatingmapdemo.MyEatingPlace.MyEatingPlaceMark;
 import com.example.myeatingmapdemo.R;

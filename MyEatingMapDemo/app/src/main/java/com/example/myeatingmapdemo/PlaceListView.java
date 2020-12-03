@@ -10,6 +10,8 @@ import android.widget.ListView;
 
 import com.example.myeatingmapdemo.FIndRestaurant.FindRestaurantMarkActivity;
 import com.example.myeatingmapdemo.MyEatingPlace.MyEatingPlaceMarkActivity;
+import com.example.myeatingmapdemo.Values.CurrentPlaceValues;
+import com.example.myeatingmapdemo.Values.ListPlaceValues;
 import com.skt.Tmap.TMapPoint;
 
 public class PlaceListView extends AppCompatActivity {
@@ -24,12 +26,12 @@ public class PlaceListView extends AppCompatActivity {
         getDataByIntent();
 
         setContentView(R.layout.activity_list_view);
-        ListView AddressListView = setAdapter();
+        ListView AddressListView = setListViewAdapter();
 
         AddressListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                CurrentPlaceValues values = setValues(position);
+                CurrentPlaceValues values = setCurrentPlaceValues(position);
                 gotoMarkActivity(values);
             }
         });
@@ -37,11 +39,12 @@ public class PlaceListView extends AppCompatActivity {
 
     private void getDataByIntent() {
         Intent intent = getIntent();
+
         listValues = (ListPlaceValues) intent.getSerializableExtra("listValues");
         kind = intent.getExtras().getString("kind");
     }
 
-    private ListView setAdapter() {
+    private ListView setListViewAdapter() {
         listViewAdapter = new ListViewAdapter();
 
         ListView AddressListView = (ListView) findViewById(R.id.Addresslistview);
@@ -59,7 +62,7 @@ public class PlaceListView extends AppCompatActivity {
         }
     }
 
-    private CurrentPlaceValues setValues(int position) {
+    private CurrentPlaceValues setCurrentPlaceValues(int position) {
         CurrentPlaceValues values = new CurrentPlaceValues();
 
         values.setPlacePoint(new TMapPoint(listValues.getPlaceFindPOILat(position), listValues.getPlaceFindPOILon(position)));
@@ -71,12 +74,8 @@ public class PlaceListView extends AppCompatActivity {
 
     private void gotoMarkActivity(CurrentPlaceValues values) {
         Intent MarkIntent;
-        if(kind.equals("My")) {
-            MarkIntent = new Intent(getApplicationContext(), MyEatingPlaceMarkActivity.class);
-        }
-        else {
-            MarkIntent = new Intent(getApplicationContext(), FindRestaurantMarkActivity.class);
-        }
+        if(kind.equals("My")) MarkIntent = new Intent(getApplicationContext(), MyEatingPlaceMarkActivity.class);
+        else MarkIntent = new Intent(getApplicationContext(), FindRestaurantMarkActivity.class);
 
         MarkIntent.putExtra("values", values);
         startActivity(MarkIntent);

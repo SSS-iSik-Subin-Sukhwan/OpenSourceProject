@@ -22,11 +22,10 @@ import com.example.myeatingmapdemo.RegisterMemo;
 import org.json.JSONObject;
 
 public class MemoMyRestaurantActivity extends AppCompatActivity {
-
+  
   private Response.Listener<String> responseListener;
   private AlertDialog dialog;
   private CurrentPlaceValues values;
-
   private String memoUserLat;
   private String memoUserLon;
   private String memoString;
@@ -53,30 +52,25 @@ public class MemoMyRestaurantActivity extends AppCompatActivity {
       }
     });
   }
-
   private void getDataByIntent() {
     Intent intent = getIntent();
     values = (CurrentPlaceValues) intent.getSerializableExtra("values");
   }
-
   private void convertGeographicCoordinatesToString() {
     memoUserLat = String.valueOf(values.getPlacePoint().getLatitude());
     memoUserLon = String.valueOf(values.getPlacePoint().getLongitude());
   }
-
   private RegisterMemo createRegisterMemoObject() {
     RegisterMemo registerMemo = new RegisterMemo(responseListener);
     registerMemo.makeRegisterMemo(memoString, memoUserLat, memoUserLon);
 
     return registerMemo;
   }
-
   private void sendDataToServerUsingRequestQueue(RegisterMemo memo) {
     RequestQueue registerQueue = Volley.newRequestQueue(MemoMyRestaurantActivity.this);
     registerQueue.add(memo);
   }
-
-  public void makeResponseListenerUsingDialog() {
+  private void makeResponseListenerUsingDialog() {
     responseListener = new Response.Listener<String>() {
       @Override
       public void onResponse(String response) {
@@ -90,8 +84,7 @@ public class MemoMyRestaurantActivity extends AppCompatActivity {
       }
     };
   }
-  
-  public void makeDialog(boolean isSuccess) {
+  private void makeDialog(boolean isSuccess) {
     if (isSuccess) {
       AlertDialog.Builder builder = new AlertDialog.Builder(MemoMyRestaurantActivity.this);
       dialog = builder.setMessage("메모를 저장하시겠습니까?")
@@ -114,7 +107,6 @@ public class MemoMyRestaurantActivity extends AppCompatActivity {
       Toast.makeText(getApplicationContext(), "서버연결 실패!", Toast.LENGTH_LONG);
     }
   }
-
   @Override
   protected void onStop() {
     super.onStop();

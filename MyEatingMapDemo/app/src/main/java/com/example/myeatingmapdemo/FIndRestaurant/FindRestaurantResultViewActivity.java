@@ -97,50 +97,8 @@ public class FindRestaurantResultViewActivity extends AppCompatActivity {
               for(int i = 0; i < kakaoAddress.length; i++){
                 kakaoAddressResult += kakaoAddress[i]; // kakoAddress[i]에 닮긴 값들을 kakaoAddressResult에 옮겨담음
               }
-
-              // LocationTemplate에 왼쪽 버튼을 설정
-              ButtonObject leftButtonObject = new ButtonObject("앱으로 돌아가기", // 왼쪽 버튼의 표시될 텍스트를 설정
-                                                               LinkObject.newBuilder()
-                                                                       .setWebUrl("https://map.kakao.com/link/map/"+ kakaoAddress + "," + foodList[i]) //
-                                                                       .setMobileWebUrl("https://map.kakao.com/link/map/"+ kakaoAddress + "," + foodList[i])
-                                                                       .build());
-
-              LocationTemplate params = LocationTemplate.newBuilder(kakaoAddressResult , // 위치 확인시 보여줄 주소칸에 표시될 값을 설정해줌
-                      ContentObject.newBuilder(foodList[i], // 카카오톡 공유시 보여줄 ContentObject를 생성, 제목란에 선택한 주변시설의 명칭을 띄워줌
-                              "https://ifh.cc/g/U4E0B.png", // 카카오톡 공유시 보여지는 이미지 설정
-                              LinkObject.newBuilder()
-
-                                      .setWebUrl("https://map.kakao.com/link/map/"+ kakaoAddressResult + "," + foodTMapPoint[i].getLatitude()+ "," + foodTMapPoint[i].getLongitude()) // 만약 웹에서 버튼들의 기능이 수행이 안된다면 주어진 링크로 이동
-                                      .setMobileWebUrl("https://map.kakao.com/link/map/"+ kakaoAddressResult + "," + foodTMapPoint[i].getLatitude()+ "," + foodTMapPoint[i].getLongitude()) // 만약 모바일에서 버튼들의 기능이 수행이 안된다면 주어진 링크로 이동
-                                      .build())
-
-                              .setDescrption("https://map.kakao.com/link/map/"+ kakaoAddressResult + "," +foodTMapPoint[i].getLatitude()+ "," + foodTMapPoint[i].getLongitude()) // 카카오톡 공유시 설명칸에 하이퍼링크형식으로 웹상에서 지도를 띄워주게 설정
-                              .build())
-
-                      .setAddressTitle(foodList[i]) // 위치 확인시 보여줄 제목칸에 선택한 주변시설의 명칭을 띄워줌
-                      .addButton(leftButtonObject) // 왼쪽버튼에 해당하는 ButtonObject를 추가
-
-                      .build();
-
-              Map<String, String> serverCallbackArgs = new HashMap<String, String>();
-              serverCallbackArgs.put("user_id", "${current_user_id}");
-              serverCallbackArgs.put("product_id", "${shared_product_id}");
-              // 카카오 서버에 저장된 값들을 가져옴
-
-              KakaoLinkService.getInstance().sendDefault(getApplicationContext(), params, serverCallbackArgs, new ResponseCallback<KakaoLinkResponse>() {
-                @Override
-                public void onFailure(ErrorResult errorResult) {
-                  Logger.e(errorResult.toString());
-                }
-
-                @Override
-                public void onSuccess(KakaoLinkResponse result) {
-                  // 템플릿 밸리데이션과 쿼터 체크가 성공적으로 끝남. 톡에서 정상적으로 보내졌는지 보장은 할 수 없다. 전송 성공 유무는 서버콜백 기능을 이용하여야 한다.
-                }
-              });
-
-
-
+              createKakaotemplate(kakaoAddress[i],kakaoAddressResult,i);
+              
             } catch (IOException e) {
               e.printStackTrace();
             } catch (ParserConfigurationException e) {
@@ -153,6 +111,50 @@ public class FindRestaurantResultViewActivity extends AppCompatActivity {
 
       }
     });
+
+  }
+  public void createKakaotemplate(String kakaoAddress,String kakaoAddressResult,final int i)
+  {
+    ButtonObject leftButtonObject = new ButtonObject("앱으로 돌아가기", // 왼쪽 버튼의 표시될 텍스트를 설정
+            LinkObject.newBuilder()
+                    .setWebUrl("https://map.kakao.com/link/map/"+ kakaoAddress + "," + foodList[i]) //
+                    .setMobileWebUrl("https://map.kakao.com/link/map/"+ kakaoAddress + "," + foodList[i])
+                    .build());
+
+    LocationTemplate params = LocationTemplate.newBuilder(kakaoAddressResult , // 위치 확인시 보여줄 주소칸에 표시될 값을 설정해줌
+            ContentObject.newBuilder(foodList[i], // 카카오톡 공유시 보여줄 ContentObject를 생성, 제목란에 선택한 주변시설의 명칭을 띄워줌
+                    "https://ifh.cc/g/U4E0B.png", // 카카오톡 공유시 보여지는 이미지 설정
+                    LinkObject.newBuilder()
+
+                            .setWebUrl("https://map.kakao.com/link/map/"+ kakaoAddressResult + "," + foodTMapPoint[i].getLatitude()+ "," + foodTMapPoint[i].getLongitude()) // 만약 웹에서 버튼들의 기능이 수행이 안된다면 주어진 링크로 이동
+                            .setMobileWebUrl("https://map.kakao.com/link/map/"+ kakaoAddressResult + "," + foodTMapPoint[i].getLatitude()+ "," + foodTMapPoint[i].getLongitude()) // 만약 모바일에서 버튼들의 기능이 수행이 안된다면 주어진 링크로 이동
+                            .build())
+
+                    .setDescrption("https://map.kakao.com/link/map/"+ kakaoAddressResult + "," +foodTMapPoint[i].getLatitude()+ "," + foodTMapPoint[i].getLongitude()) // 카카오톡 공유시 설명칸에 하이퍼링크형식으로 웹상에서 지도를 띄워주게 설정
+                    .build())
+
+            .setAddressTitle(foodList[i]) // 위치 확인시 보여줄 제목칸에 선택한 주변시설의 명칭을 띄워줌
+            .addButton(leftButtonObject) // 왼쪽버튼에 해당하는 ButtonObject를 추가
+
+            .build();
+
+    Map<String, String> serverCallbackArgs = new HashMap<String, String>();
+    serverCallbackArgs.put("user_id", "${current_user_id}");
+    serverCallbackArgs.put("product_id", "${shared_product_id}");
+    // 카카오 서버에 저장된 값들을 가져옴
+
+    KakaoLinkService.getInstance().sendDefault(getApplicationContext(), params, serverCallbackArgs, new ResponseCallback<KakaoLinkResponse>() {
+      @Override
+      public void onFailure(ErrorResult errorResult) {
+        Logger.e(errorResult.toString());
+      }
+
+      @Override
+      public void onSuccess(KakaoLinkResponse result) {
+        // 템플릿 밸리데이션과 쿼터 체크가 성공적으로 끝남. 톡에서 정상적으로 보내졌는지 보장은 할 수 없다. 전송 성공 유무는 서버콜백 기능을 이용하여야 한다.
+      }
+    });
+
 
   }
 }

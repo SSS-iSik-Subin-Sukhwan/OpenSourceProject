@@ -54,7 +54,6 @@ public class FindRestaurantResultViewActivity extends AppCompatActivity {
 
     final ListView foodListView = (ListView)findViewById(R.id.foodListView);
 
-
     foodListView.setAdapter(foodListAdapter);
 
     for (int i = 0; i < foodSize; i++) {

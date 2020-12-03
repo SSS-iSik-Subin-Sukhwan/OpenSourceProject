@@ -14,14 +14,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.toolbox.Volley;
-import com.example.myeatingmapdemo.CurrentPlaceValues;
+import com.example.myeatingmapdemo.Values.CurrentPlaceValues;
 import com.example.myeatingmapdemo.MainActivity;
 import com.example.myeatingmapdemo.R;
 import com.example.myeatingmapdemo.RegisterMemo;
 
 import org.json.JSONObject;
 
-public class MyEatingPlaceMemoActivty extends AppCompatActivity {
+public class MemoMyRestaurantActivity extends AppCompatActivity {
 
   private Response.Listener<String> responseListener;
   private AlertDialog dialog;
@@ -98,7 +98,7 @@ public class MyEatingPlaceMemoActivty extends AppCompatActivity {
     RegisterMemo registerMemo = new RegisterMemo(responseListener);
     registerMemo.makeRegisterMemo(memoString, memoUserLat, memoUserLon);
 
-    RequestQueue registerQueue = Volley.newRequestQueue(MyEatingPlaceMemoActivty.this);
+    RequestQueue registerQueue = Volley.newRequestQueue(MemoMyRestaurantActivity.this);
     registerQueue.add(registerMemo);
   }
 
@@ -119,7 +119,7 @@ public class MyEatingPlaceMemoActivty extends AppCompatActivity {
   
   public void makeDialog(boolean isSuccess) {
     if (isSuccess) {
-      AlertDialog.Builder builder = new AlertDialog.Builder(MyEatingPlaceMemoActivty.this);
+      AlertDialog.Builder builder = new AlertDialog.Builder(MemoMyRestaurantActivity.this);
       dialog = builder.setMessage("메모를 저장하시겠습니까?")
               .setPositiveButton("확인", new DialogInterface.OnClickListener() {
                 @Override

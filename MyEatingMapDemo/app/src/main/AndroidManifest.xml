@@ -17,7 +17,7 @@
 
         <activity android:name=".MarkMyRestaurant.MarkMyRestaurantActivity" />
         <activity android:name=".FIndRestaurant.FindRestaurantResultViewActivity" />
-        <activity android:name=".MyEatingPlace.MyEatingPlaceMemoActivty" />
+        <activity android:name=".MyEatingPlace.MemoMyRestaurantActivity" />
         <activity android:name=".MyEatingPlace.MyEatingPlaceMarkActivity" />
         <activity android:name=".FIndRestaurant.FindRestaurantMarkActivity" />
         <activity android:name=".PlaceListView" />

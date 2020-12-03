@@ -20,7 +20,7 @@
         <activity android:name=".MyEatingPlace.MemoMyRestaurantActivity" />
         <activity android:name=".MyEatingPlace.MyEatingPlaceMarkActivity" />
         <activity android:name=".FIndRestaurant.FindRestaurantMarkActivity" />
-        <activity android:name=".PlaceListView" />
+        <activity android:name=".SearchedPlaceListViewActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

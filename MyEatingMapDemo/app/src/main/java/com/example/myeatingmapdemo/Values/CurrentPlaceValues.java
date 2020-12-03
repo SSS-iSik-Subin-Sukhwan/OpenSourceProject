@@ -1,20 +1,20 @@
-package com.example.myeatingmapdemo;
+package com.example.myeatingmapdemo.Values;
 
 import com.skt.Tmap.TMapPoint;
 
 import java.io.Serializable;
 
 public class CurrentPlaceValues implements Serializable {
-    private double placeLatitude;
-    private double placeLongitude;
     private String placeName;
     private String placeAddress;
+    private double placeLatitude;
+    private double placeLongitude;
 
     public CurrentPlaceValues() {
-        placeLatitude = 0;
-        placeLongitude = 0;
         placeName = new String();
         placeAddress = new String();
+        placeLatitude = 0;
+        placeLongitude = 0;
     }
 
     public TMapPoint getPlacePoint() {

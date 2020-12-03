@@ -27,9 +27,7 @@ public class ListViewAdapter extends BaseAdapter {
     final Context context = parent.getContext();
     View tempView = convertView;
 
-    if (tempView == null) {
-      tempView = getConvertView(context, parent);
-    }
+    if (tempView == null) tempView = getConvertView(context, parent);
 
     getTextView(tempView);
     setTextView(listViewItemList.get(position));

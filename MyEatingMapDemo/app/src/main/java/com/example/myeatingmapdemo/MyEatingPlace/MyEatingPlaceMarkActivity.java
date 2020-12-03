@@ -11,7 +11,7 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.myeatingmapdemo.CurrentPlaceValues;
+import com.example.myeatingmapdemo.Values.CurrentPlaceValues;
 import com.example.myeatingmapdemo.R;
 import com.skt.Tmap.TMapPoint;
 import com.skt.Tmap.TMapView;

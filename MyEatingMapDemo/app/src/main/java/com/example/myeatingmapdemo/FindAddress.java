@@ -75,12 +75,12 @@ public class FindAddress {
 
             listValues.setPlaceFindPOIResult(i, item.getPOIName());
             listValues.setPlaceFindAddressResult(i, item.getPOIAddress().replace("null", ""));
-            listValues.setPlaceFindPOILat(i, item.getPOIPoint().getLatitude());
-            listValues.setPlaceFindPOILon(i, item.getPOIPoint().getLongitude());
+            listValues.setPlaceFindPOILatitude(i, item.getPOIPoint().getLatitude());
+            listValues.setPlaceFindPOILongitude(i, item.getPOIPoint().getLongitude());
             listValues.setPlacePOIItemSize(poi.size());
         }
 
-        Intent ListViewIntent = new Intent(context, PlaceListView.class);
+        Intent ListViewIntent = new Intent(context, SearchedPlaceListViewActivity.class);
         ListViewIntent.putExtra("listValues", listValues);
 
         if(num == 1) ListViewIntent.putExtra("kind", "My");

@@ -16,6 +16,8 @@ public class ListViewItem {
 
   public String getPOIStr() { return POIStr; }
   public String getAddressStr() { return AddressStr; }
+  public double getPOIlatitude() { return POIlatitude; }
+  public double getPOIlongitude() { return POIlongitude; }
 
   public void setPOIStr(String POI) { POIStr = POI; }
   public void setAddressStr(String address) { AddressStr = address; }

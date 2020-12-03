@@ -14,7 +14,7 @@ import com.example.myeatingmapdemo.Values.CurrentPlaceValues;
 import com.example.myeatingmapdemo.Values.ListPlaceValues;
 import com.skt.Tmap.TMapPoint;
 
-public class PlaceListView extends AppCompatActivity {
+public class SearchedPlaceListViewActivity extends AppCompatActivity {
     private ListViewAdapter listViewAdapter;
     private ListPlaceValues listValues;
     private String kind;
@@ -58,14 +58,14 @@ public class PlaceListView extends AppCompatActivity {
     private void adapterAddItem() {
         for (int i=0;i<listValues.getPlacePOIItemSize(); i++) {
             listViewAdapter.addItem(listValues.getPlaceFindPOIResult(i), listValues.getPlaceFindAddressResult(i),
-                    listValues.getPlaceFindPOILat(i), listValues.getPlaceFindPOILon(i));
+                    listValues.getPlaceFindPOILatitude(i), listValues.getPlaceFindPOILongitude(i));
         }
     }
 
     private CurrentPlaceValues setCurrentPlaceValues(int position) {
         CurrentPlaceValues values = new CurrentPlaceValues();
 
-        values.setPlacePoint(new TMapPoint(listValues.getPlaceFindPOILat(position), listValues.getPlaceFindPOILon(position)));
+        values.setPlacePoint(new TMapPoint(listValues.getPlaceFindPOILatitude(position), listValues.getPlaceFindPOILongitude(position)));
         values.setPlaceName(listValues.getPlaceFindPOIResult(position));
         values.setPlaceAddress(listValues.getPlaceFindAddressResult(position));
 

@@ -63,13 +63,13 @@ public class ListViewAdapter extends BaseAdapter {
   @Override
   public Object getItem(int position) { return listViewItemList.get(position); }
 
-  public void addItem(String POI, String address, double latitude, double logitude) {
+  public void addItem(String POI, String address, double latitude, double longitude) {
     ListViewItem item = new ListViewItem();
 
     item.setPOIStr(POI);
     item.setAddressStr(address);
     item.setPOIlatitude(latitude);
-    item.setPOIlongitude(logitude);
+    item.setPOIlongitude(longitude);
 
     listViewItemList.add(item);
   }

@@ -31,8 +31,6 @@ public class MemoMyRestaurantActivity extends AppCompatActivity {
   private String memoUserLon;
   private String memoString;
 
-  private boolean validate = false;
-
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -40,7 +38,7 @@ public class MemoMyRestaurantActivity extends AppCompatActivity {
     setContentView(R.layout.activity_my_eating_place_memo_activty);
 
     getDataByIntent();
-    getGeographicPointByString();
+    convertGeographicCoordinatesToString();
 
     Button completeMemoBtn = (Button)findViewById(R.id.memocompletebtn);
     final EditText memoEditText = (EditText)findViewById(R.id.memoEdit);
@@ -49,12 +47,9 @@ public class MemoMyRestaurantActivity extends AppCompatActivity {
       @Override
       public void onClick(View v) {
         memoString = memoEditText.getText().toString();
-
-        if (validate) return;
-
-        checkServer();
-        savedMemo();
-        setRegisterQueue();
+        RegisterMemo memo = createRegisterMemoObject();
+        makeResponseListenerUsingDialog();
+        sendDataToServerUsingRequestQueue(memo);
       }
     });
   }
@@ -64,45 +59,24 @@ public class MemoMyRestaurantActivity extends AppCompatActivity {
     values = (CurrentPlaceValues) intent.getSerializableExtra("values");
   }
 
-  private void getGeographicPointByString() {
+  private void convertGeographicCoordinatesToString() {
     memoUserLat = String.valueOf(values.getPlacePoint().getLatitude());
     memoUserLon = String.valueOf(values.getPlacePoint().getLongitude());
   }
 
-  public void checkServer() {
-    responseListener = new Response.Listener<String>() {
-      @Override
-      public void onResponse(String response) {
-        try {
-          JSONObject jsonResponse = new JSONObject(response);
-          boolean success = jsonResponse.getBoolean("success");
-
-          makeToastText(success);
-        } catch (Exception e) {
-          e.printStackTrace();
-        }
-      }
-    };
-  }
-
-  public void makeToastText ( boolean isConnect){
-    if (isConnect) {
-      Toast.makeText(getApplicationContext(), "서버연결에 성공했습니다", Toast.LENGTH_LONG).show();
-      validate = true;
-    } else {
-      Toast.makeText(getApplicationContext(), "서버연결 실패!", Toast.LENGTH_LONG);
-    }
-  }
-
-  public void setRegisterQueue () {
+  private RegisterMemo createRegisterMemoObject() {
     RegisterMemo registerMemo = new RegisterMemo(responseListener);
     registerMemo.makeRegisterMemo(memoString, memoUserLat, memoUserLon);
 
-    RequestQueue registerQueue = Volley.newRequestQueue(MemoMyRestaurantActivity.this);
-    registerQueue.add(registerMemo);
+    return registerMemo;
   }
 
-  public void savedMemo () {
+  private void sendDataToServerUsingRequestQueue(RegisterMemo memo) {
+    RequestQueue registerQueue = Volley.newRequestQueue(MemoMyRestaurantActivity.this);
+    registerQueue.add(memo);
+  }
+
+  public void makeResponseListenerUsingDialog() {
     responseListener = new Response.Listener<String>() {
       @Override
       public void onResponse(String response) {

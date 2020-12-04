@@ -6,75 +6,47 @@ import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.LinearLayout;
-import android.widget.TextView;
-
-import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.myeatingmapdemo.Memo.MemoMyRestaurantActivity;
 import com.example.myeatingmapdemo.Values.CurrentPlaceValues;
 import com.example.myeatingmapdemo.R;
-import com.skt.Tmap.TMapMarkerItem;
-import com.skt.Tmap.TMapPoint;
 import com.skt.Tmap.TMapView;
 
-public class MarkRestaurantActivity extends AppCompatActivity {
+public class MarkRestaurantActivity extends MarkActivity {
 
-  TMapView tMapView;
-  TextView address_textView;
-  TextView name_textView;
-  Button yesBtn;
+    TMapView tMapView;
+    Bitmap markerImage;
+    Button yesBtn;
+    CurrentPlaceValues currentPlaceValues;
 
-  static Bitmap markerImage;
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_my_restaurant_mark);
 
-  CurrentPlaceValues currentPlaceValues;
+        Intent intent = getIntent();
 
-  @Override
-  protected void onCreate(Bundle savedInstanceState) {
-    super.onCreate(savedInstanceState);
-    setContentView(R.layout.activity_my_eating_place_mark);
-
-    Intent intent = getIntent();
-    currentPlaceValues = (CurrentPlaceValues) intent.getSerializableExtra("values");
+        currentPlaceValues = (CurrentPlaceValues) intent.getSerializableExtra("values");
+        markerImage = BitmapFactory.decodeResource(this.getResources(), R.drawable.markerblack); // 중간지점의 마커로 사용할 이미지 지정
 
 
-    LinearLayout linearLayoutTmap = (LinearLayout) findViewById(R.id.mapview);
-    tMapView = new TMapView(this);
-    name_textView = (TextView) findViewById(R.id.nameOfLocation);
-    address_textView = (TextView) findViewById(R.id.nameOfAddress);
+        addMarkerItemToTmapView(markerImage, tMapView, currentPlaceValues.getPlacePoint()); // 검색한 위치에 마커를 뜨게 하는 메소드
+        setTextView(currentPlaceValues);
+        setTmapView(currentPlaceValues);
+        setYesBtn();
+    }
 
-    linearLayoutTmap.addView(tMapView);
+    @Override
+    protected void setYesBtn() {
+        yesBtn = (Button) findViewById(R.id.yesBtn);
 
-    markerImage = BitmapFactory.decodeResource(this.getResources(), R.drawable.markerblack); // 중간지점의 마커로 사용할 이미지 지정
-
-    markReturn(markerImage, tMapView, currentPlaceValues.getPlacePoint()); // 검색한 위치에 마커를 뜨게 하는 메소드
-
-    address_textView.setText(currentPlaceValues.getPlaceAddress()); // 프레임 레이아웃의 제목텍스트를 검색한 위치의 이름으로 설정
-    name_textView.setText(currentPlaceValues.getPlaceName()); // 프레임 레이아웃의 주소텍스트를 검색한 위치의 주소로 설정
-
-    tMapView.setCenterPoint(currentPlaceValues.getPlacePoint().getLongitude(), currentPlaceValues.getPlacePoint().getLatitude()); // tMapView가 보여지는 곳을 검색한 좌표로 설정함
-
-
-    yesBtn = (Button) findViewById(R.id.yesBtn);
-
-    yesBtn.setOnClickListener(new Button.OnClickListener() {
-      @Override
-      public void onClick(View view) {
-        Intent MemoIntent = new Intent(getApplicationContext(), MemoMyRestaurantActivity.class);
-        MemoIntent.putExtra("values", currentPlaceValues);
-        startActivity(MemoIntent);
-
-      }
-    });
-  }
-  public static void markReturn(Bitmap markerImage, TMapView tMapView, TMapPoint markerItemPoint){
-
-    TMapMarkerItem markerItem = new TMapMarkerItem();
-
-    markerItem.setIcon(markerImage);
-    markerItem.setTMapPoint(markerItemPoint);
-    tMapView.addMarkerItem("markerItem", markerItem);
-    tMapView.setCenterPoint(markerItemPoint.getLongitude(), markerItemPoint.getLatitude());
-
-  }
+        yesBtn.setOnClickListener(new Button.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent MemoIntent = new Intent(getApplicationContext(), MemoMyRestaurantActivity.class);
+                MemoIntent.putExtra("values", currentPlaceValues);
+                startActivity(MemoIntent);
+            }
+        });
+    }
 }

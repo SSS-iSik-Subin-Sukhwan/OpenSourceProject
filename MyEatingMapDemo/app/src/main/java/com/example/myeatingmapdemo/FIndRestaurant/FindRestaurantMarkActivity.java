@@ -7,124 +7,92 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.appcompat.app.AppCompatActivity;
-
+import com.example.myeatingmapdemo.MarkMyRestaurant.MarkActivity;
 import com.example.myeatingmapdemo.Values.CurrentPlaceValues;
 import com.example.myeatingmapdemo.MainActivity;
 import com.example.myeatingmapdemo.R;
 import com.example.myeatingmapdemo.Values.ListPlaceValues;
 import com.skt.Tmap.TMapData;
-import com.skt.Tmap.TMapMarkerItem;
 import com.skt.Tmap.TMapPOIItem;
 import com.skt.Tmap.TMapPoint;
 import com.skt.Tmap.TMapView;
 
 import java.util.ArrayList;
 
-public class FindRestaurantMarkActivity extends AppCompatActivity {
+public class FindRestaurantMarkActivity extends MarkActivity {
 
-  TMapView tMapView;
-  TextView address_textView;
-  TextView name_textView;
-  Button yesBtn;
+    Bitmap markerImage;
+    Button yesBtn;
 
-  static Bitmap markerImage;
+    CurrentPlaceValues currentPlaceValues;
+    static ListPlaceValues listPlaceValues = new ListPlaceValues();
 
-//  public static String[] foodList = new String[20];
-//  public static String[] foodAddress = new String[20];
-//  public static TMapPoint[] foodTMapPoint =  new TMapPoint[20];
-//  public static double[] foodLat = new double[21];
-//  public static double[] foodLon = new double[21];
-//  public static int foodSize = 0;
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
 
-  CurrentPlaceValues values;
-  ListPlaceValues listPlaceValues;
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_find_restaurant_mark);
 
-  @Override
-  protected void onCreate(Bundle savedInstanceState) {
+        Intent intent = getIntent();
+        currentPlaceValues = (CurrentPlaceValues) intent.getSerializableExtra("values");
 
-    super.onCreate(savedInstanceState);
-    setContentView(R.layout.activity_my_eating_place_mark);
+        markerImage = BitmapFactory.decodeResource(this.getResources(), R.drawable.markerblack); // 중간지점의 마커로 사용할 이미지 지정
 
-    Intent intent = getIntent();
-    values = (CurrentPlaceValues) intent.getSerializableExtra("values");
+        LinearLayout linearLayoutTmap = (LinearLayout) findViewById(R.id.mapview);
+        TMapView tMapView = new TMapView(this);
+        linearLayoutTmap.addView(tMapView);
 
-    LinearLayout linearLayoutTmap = (LinearLayout) findViewById(R.id.mapview);
-    tMapView = new TMapView(this);
-    name_textView = (TextView) findViewById(R.id.nameOfLocation);
-    address_textView = (TextView) findViewById(R.id.nameOfAddress);
+        addMarkerItemToTmapView(markerImage, tMapView, currentPlaceValues.getPlacePoint()); // 검색한 위치에 마커를 뜨게 하는 메소드
 
-    linearLayoutTmap.addView(tMapView);
+        setTextView(currentPlaceValues);
+        setTmapView(currentPlaceValues);
 
-    markerImage = BitmapFactory.decodeResource(this.getResources(), R.drawable.markerblack); // 중간지점의 마커로 사용할 이미지 지정
+        setYesBtn();
+    }
 
-    markReturn(markerImage, tMapView, values.getPlacePoint()); // 검색한 위치에 마커를 뜨게 하는 메소드
+    @Override
+    protected void setYesBtn() {
+        yesBtn = (Button) findViewById(R.id.yesBtn);
 
-    address_textView.setText(values.getPlaceAddress()); // 프레임 레이아웃의 제목텍스트를 검색한 위치의 이름으로 설정
-    name_textView.setText(values.getPlaceName()); // 프레임 레이아웃의 주소텍스트를 검색한 위치의 주소로 설정
+        yesBtn.setOnClickListener(new Button.OnClickListener() {
+            @Override
+            public void onClick(View view) {
 
-    tMapView.setCenterPoint(values.getPlacePoint().getLongitude(), values.getPlacePoint().getLatitude()); // tMapView가 보여지는 곳을 검색한 좌표로 설정함
+                TMapData tMapData = new TMapData();
+                TMapPoint point = currentPlaceValues.getPlacePoint();
 
+                tMapData.findAroundNamePOI(point, "한식;중식;양식", 1, 20, new TMapData.FindAroundNamePOIListenerCallback() {
+                    @Override
+                    public void onFindAroundNamePOI(ArrayList<TMapPOIItem> POI_item) {
+                        if (POI_item == null) {
 
-    yesBtn = (Button) findViewById(R.id.yesBtn);
+                            Toast.makeText(FindRestaurantMarkActivity.this, "반경 1km 이내에 음식점이 없습니다!", Toast.LENGTH_LONG).show();
 
-    yesBtn.setOnClickListener(new Button.OnClickListener() {
-      @Override
-      public void onClick(View view) {
+                            Intent backMainIntent = new Intent(getApplicationContext(), MainActivity.class);
+                            startActivity(backMainIntent);
 
-        TMapData tmapdata = new TMapData();
-        TMapPoint point = values.getPlacePoint();
+                        } else {
+                            for (int i = 0; i < POI_item.size(); i++) {
+                                TMapPOIItem item = POI_item.get(i);
+                                listPlaceValues.setPlaceFindPOIResult(i, item.getPOIName());
+                                listPlaceValues.setPlaceFindAddressResult(i, item.getPOIAddress().replace("null", ""));
+                                listPlaceValues.setPlaceFindPOITMapPoint(i, item.getPOIPoint());// Point 넣지 말아보자
+                                listPlaceValues.setPlaceFindPOILatitude(i, item.getPOIPoint().getLatitude());
+                                listPlaceValues.setPlaceFindPOILongitude(i, item.getPOIPoint().getLongitude());
+                                listPlaceValues.setPlacePOIItemSize(POI_item.size());
 
-        tmapdata.findAroundNamePOI(point, "한식;중식;양식", 1, 20, new TMapData.FindAroundNamePOIListenerCallback() {
-          @Override
-          public void onFindAroundNamePOI(ArrayList<TMapPOIItem> POI_item) {
-            if (POI_item == null) {
+                            }
+                        }
+                    }
+                });
 
-              Toast.makeText(FindRestaurantMarkActivity.this, "반경 1km 이내에 음식점이 없습니다!", Toast.LENGTH_LONG).show();
-
-              Intent backMainIntent = new Intent(getApplicationContext(), MainActivity.class);
-              startActivity(backMainIntent);
+                Intent MemoIntent = new Intent(getApplicationContext(), FindRestaurantResultViewActivity.class);
+                startActivity(MemoIntent);
 
             }
-            else{
-              for (int i = 0; i < POI_item.size(); i++) {
-
-                TMapPOIItem item = POI_item.get(i);
-                listPlaceValues.setPlaceFindPOIResult(i, item.getPOIName());
-                listPlaceValues.setPlaceFindAddressResult(i, item.getPOIAddress().replace("null", ""));
-                listPlaceValues.setPlaceFindPOITMapPoint(i, item.getPOIPoint());// Point 넣지 말아보자
-                listPlaceValues.setPlaceFindPOILatitude(i, item.getPOIPoint().getLatitude());
-                listPlaceValues.setPlaceFindPOILongitude(i, item.getPOIPoint().getLongitude());
-                listPlaceValues.setPlacePOIItemSize(POI_item.size());
-//                foodList[i] = item.getPOIName();
-//                foodAddress[i] = item.getPOIAddress().replace("null", "");
-//                foodTMapPoint[i] = item.getPOIPoint();
-//                foodLat[i]= item.getPOIPoint().getLatitude();
-//                foodLon[i]= item.getPOIPoint().getLongitude();
-//                foodSize = POI_item.size();
-
-              }
-            }
-          }
         });
-
-
-        Intent MemoIntent = new Intent(getApplicationContext(), FindRestaurantResultViewActivity.class);
-        startActivity(MemoIntent);
-
-      }
-    });
-  }
-  public static void markReturn(Bitmap markerImage, TMapView tMapView, TMapPoint markerItemPoint){
-
-    TMapMarkerItem markerItem = new TMapMarkerItem();
-    markerItem.setIcon(markerImage);
-    markerItem.setTMapPoint(markerItemPoint);
-    tMapView.addMarkerItem("markerItem", markerItem);
-    tMapView.setCenterPoint(markerItemPoint.getLongitude(), markerItemPoint.getLatitude());
-  }
+    }
 
 }

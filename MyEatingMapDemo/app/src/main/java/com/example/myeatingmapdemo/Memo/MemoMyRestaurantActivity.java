@@ -33,7 +33,7 @@ public class MemoMyRestaurantActivity extends AppCompatActivity {
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
 
-    setContentView(R.layout.activity_my_eating_place_memo_activty);
+    setContentView(R.layout.activity_my_restaurant_memo_activty);
 
     getDataByIntent();
     convertGeographicCoordinatesToString();

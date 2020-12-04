@@ -13,7 +13,7 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
 
-        <activity android:name=".CheckMyRestaurant.popupActivity" android:theme="@android:style/Theme.Dialog" />
+        <activity android:name=".CheckMyRestaurant.PopUpActivity" android:theme="@android:style/Theme.Dialog" />
 
         <activity android:name=".CheckMyRestaurant.CheckMyRestaurantActivity" />
         <activity android:name=".FIndRestaurant.FindRestaurantResultViewActivity" />

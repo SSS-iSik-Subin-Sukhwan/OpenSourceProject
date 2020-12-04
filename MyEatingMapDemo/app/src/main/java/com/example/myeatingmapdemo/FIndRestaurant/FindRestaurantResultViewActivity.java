@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.myeatingmapdemo.ListViewAdapter;
 import com.example.myeatingmapdemo.R;
+import com.example.myeatingmapdemo.Values.ListPlaceValues;
 import com.kakao.kakaolink.v2.KakaoLinkResponse;
 import com.kakao.kakaolink.v2.KakaoLinkService;
 import com.kakao.message.template.ButtonObject;
@@ -30,16 +31,19 @@ import java.util.Map;
 
 import javax.xml.parsers.ParserConfigurationException;
 
-import static com.example.myeatingmapdemo.FIndRestaurant.FindRestaurantMarkActivity.foodAddress;
-import static com.example.myeatingmapdemo.FIndRestaurant.FindRestaurantMarkActivity.foodLat;
-import static com.example.myeatingmapdemo.FIndRestaurant.FindRestaurantMarkActivity.foodList;
-import static com.example.myeatingmapdemo.FIndRestaurant.FindRestaurantMarkActivity.foodLon;
-import static com.example.myeatingmapdemo.FIndRestaurant.FindRestaurantMarkActivity.foodSize;
-import static com.example.myeatingmapdemo.FIndRestaurant.FindRestaurantMarkActivity.foodTMapPoint;
+//import static com.example.myeatingmapdemo.FIndRestaurant.FindRestaurantMarkActivity.foodAddress;
+//import static com.example.myeatingmapdemo.FIndRestaurant.FindRestaurantMarkActivity.foodLat;
+//import static com.example.myeatingmapdemo.FIndRestaurant.FindRestaurantMarkActivity.foodList;
+//import static com.example.myeatingmapdemo.FIndRestaurant.FindRestaurantMarkActivity.foodLon;
+//import static com.example.myeatingmapdemo.FIndRestaurant.FindRestaurantMarkActivity.foodSize;
+//import static com.example.myeatingmapdemo.FIndRestaurant.FindRestaurantMarkActivity.foodTMapPoint;
 
 public class FindRestaurantResultViewActivity extends AppCompatActivity {
   boolean updateListview = false;
   static ListViewAdapter foodListAdapter = new ListViewAdapter();
+
+  ListPlaceValues listPlaceValues;
+
   @Override
   protected void onResume() {
     super.onResume();
@@ -56,10 +60,16 @@ public class FindRestaurantResultViewActivity extends AppCompatActivity {
 
     foodListView.setAdapter(foodListAdapter);
 
-    for (int i = 0; i < foodSize; i++) {
-      foodListAdapter.addItem(foodList[i], foodAddress[i], foodLat[i],foodLon[i]);
-    }
+//    for (int i = 0; i < foodSize; i++) {
+//      foodListAdapter.addItem(foodList[i], foodAddress[i], foodLat[i],foodLon[i]);
+//    }
 
+    for (int i = 0; i < listPlaceValues.getPlacePOIItemSize(); i++) {
+      foodListAdapter.addItem(listPlaceValues.getPlaceFindPOIResult(i),
+              listPlaceValues.getPlaceFindAddressResult(i),
+              listPlaceValues.getPlaceFindPOILatitude(i),
+              listPlaceValues.getPlaceFindPOILongitude(i));
+    }
 
     loadingBtn.setOnClickListener(new View.OnClickListener() {
       @Override
@@ -86,10 +96,12 @@ public class FindRestaurantResultViewActivity extends AppCompatActivity {
             try {
 
               //String kakaoName  = foodList[i]; // 카카오톡에 공유할 때 제목에 사용될 String값을 foodList에 i번에서 가져옴
-
+              String kakaoName  = listPlaceValues.getPlaceFindPOIResult(i);
               String getKakaoAddress = null; // 주소값을 가져옴
 
-              getKakaoAddress = new TMapData().convertGpsToAddress(foodTMapPoint[i].getLatitude(), foodTMapPoint[i].getLongitude());
+              //getKakaoAddress = new TMapData().convertGpsToAddress(foodTMapPoint[i].getLatitude(), foodTMapPoint[i].getLongitude());
+              getKakaoAddress = new TMapData().convertGpsToAddress(listPlaceValues.getPlaceFindPOILatitude(i),
+                      listPlaceValues.getPlaceFindPOILongitude(i));
 
               String[] kakaoAddress  = getKakaoAddress.split(" "); // 위도와 경도를 주소로 옮긴 값인 getKakaoAddress에 스페이스가 포함되어 있어 url에 데이터를 입력하면 페이지가 정상적으로 띄워지지않아서 스페이스를 뺀 주소를 제대로 얻어오기위한 String 배열을 생성.
               String kakaoAddressResult = new String(); // 최종적으로 배열에 담긴 값을 반환받음
@@ -116,24 +128,28 @@ public class FindRestaurantResultViewActivity extends AppCompatActivity {
   public void createKakaotemplate(String kakaoAddress,String kakaoAddressResult,final int i)
   {
     ButtonObject leftButtonObject = new ButtonObject("앱으로 돌아가기", // 왼쪽 버튼의 표시될 텍스트를 설정
+//            LinkObject.newBuilder()
+//                    .setWebUrl("https://map.kakao.com/link/map/"+ kakaoAddress + "," + foodList[i]) //
+//                    .setMobileWebUrl("https://map.kakao.com/link/map/"+ kakaoAddress + "," + foodList[i])
+//                    .build());
             LinkObject.newBuilder()
-                    .setWebUrl("https://map.kakao.com/link/map/"+ kakaoAddress + "," + foodList[i]) //
-                    .setMobileWebUrl("https://map.kakao.com/link/map/"+ kakaoAddress + "," + foodList[i])
+                    .setWebUrl("https://map.kakao.com/link/map/"+ kakaoAddress + "," + listPlaceValues.getPlaceFindPOIResult(i)) //
+                    .setMobileWebUrl("https://map.kakao.com/link/map/"+ kakaoAddress + "," + listPlaceValues.getPlaceFindPOIResult(i))
                     .build());
 
     LocationTemplate params = LocationTemplate.newBuilder(kakaoAddressResult , // 위치 확인시 보여줄 주소칸에 표시될 값을 설정해줌
-            ContentObject.newBuilder(foodList[i], // 카카오톡 공유시 보여줄 ContentObject를 생성, 제목란에 선택한 주변시설의 명칭을 띄워줌
+            ContentObject.newBuilder(listPlaceValues.getPlaceFindPOIResult(i), // 카카오톡 공유시 보여줄 ContentObject를 생성, 제목란에 선택한 주변시설의 명칭을 띄워줌
                     "https://ifh.cc/g/U4E0B.png", // 카카오톡 공유시 보여지는 이미지 설정
                     LinkObject.newBuilder()
 
-                            .setWebUrl("https://map.kakao.com/link/map/"+ kakaoAddressResult + "," + foodTMapPoint[i].getLatitude()+ "," + foodTMapPoint[i].getLongitude()) // 만약 웹에서 버튼들의 기능이 수행이 안된다면 주어진 링크로 이동
-                            .setMobileWebUrl("https://map.kakao.com/link/map/"+ kakaoAddressResult + "," + foodTMapPoint[i].getLatitude()+ "," + foodTMapPoint[i].getLongitude()) // 만약 모바일에서 버튼들의 기능이 수행이 안된다면 주어진 링크로 이동
+                            .setWebUrl("https://map.kakao.com/link/map/"+ kakaoAddressResult + "," + listPlaceValues.getPlaceFindPOILatitude(i)+ "," + listPlaceValues.getPlaceFindPOILongitude(i)) // 만약 웹에서 버튼들의 기능이 수행이 안된다면 주어진 링크로 이동
+                            .setMobileWebUrl("https://map.kakao.com/link/map/"+ kakaoAddressResult + "," + listPlaceValues.getPlaceFindPOILatitude(i)+ "," + listPlaceValues.getPlaceFindPOILongitude(i)) // 만약 모바일에서 버튼들의 기능이 수행이 안된다면 주어진 링크로 이동
                             .build())
 
-                    .setDescrption("https://map.kakao.com/link/map/"+ kakaoAddressResult + "," +foodTMapPoint[i].getLatitude()+ "," + foodTMapPoint[i].getLongitude()) // 카카오톡 공유시 설명칸에 하이퍼링크형식으로 웹상에서 지도를 띄워주게 설정
+                    .setDescrption("https://map.kakao.com/link/map/"+ kakaoAddressResult + "," +listPlaceValues.getPlaceFindPOITMapPoint(i).getLatitude()+ "," + listPlaceValues.getPlaceFindPOITMapPoint(i).getLongitude()) // 카카오톡 공유시 설명칸에 하이퍼링크형식으로 웹상에서 지도를 띄워주게 설정
                     .build())
 
-            .setAddressTitle(foodList[i]) // 위치 확인시 보여줄 제목칸에 선택한 주변시설의 명칭을 띄워줌
+            .setAddressTitle(listPlaceValues.getPlaceFindPOIResult(i)) // 위치 확인시 보여줄 제목칸에 선택한 주변시설의 명칭을 띄워줌
             .addButton(leftButtonObject) // 왼쪽버튼에 해당하는 ButtonObject를 추가
 
             .build();

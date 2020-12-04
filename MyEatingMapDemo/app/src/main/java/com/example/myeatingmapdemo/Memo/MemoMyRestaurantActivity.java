@@ -1,4 +1,4 @@
-package com.example.myeatingmapdemo.MyEatingPlace;
+package com.example.myeatingmapdemo.Memo;
 
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -17,7 +17,6 @@ import com.android.volley.toolbox.Volley;
 import com.example.myeatingmapdemo.Values.CurrentPlaceValues;
 import com.example.myeatingmapdemo.MainActivity;
 import com.example.myeatingmapdemo.R;
-import com.example.myeatingmapdemo.RegisterMemo;
 
 import org.json.JSONObject;
 

@@ -1,4 +1,4 @@
-package com.example.myeatingmapdemo.MarkMyRestaurant;
+package com.example.myeatingmapdemo.CheckMyRestaurant;
 
 import android.app.Activity;
 import android.content.Intent;

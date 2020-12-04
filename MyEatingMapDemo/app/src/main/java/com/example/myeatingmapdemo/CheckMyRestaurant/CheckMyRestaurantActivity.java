@@ -1,4 +1,4 @@
-package com.example.myeatingmapdemo.MarkMyRestaurant;
+package com.example.myeatingmapdemo.CheckMyRestaurant;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -24,9 +24,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 
-//import static com.example.myeatingmapdemo.array_saving_class.alTMapPoint;
-
-public class MarkMyRestaurantActivity extends AppCompatActivity {
+public class CheckMyRestaurantActivity extends AppCompatActivity {
   private static ArrayList<TMapPoint> userPointArr = new ArrayList<>();
   private static ArrayList<String> userMemoArr = new ArrayList<>();
   private static ArrayList<String> userLatArr = new ArrayList<>();

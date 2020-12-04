@@ -1,4 +1,4 @@
-package com.example.myeatingmapdemo;
+package com.example.myeatingmapdemo.Memo;
 
 import com.android.volley.Response;
 import com.android.volley.toolbox.StringRequest;

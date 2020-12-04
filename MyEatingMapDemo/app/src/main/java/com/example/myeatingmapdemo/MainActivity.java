@@ -6,7 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import androidx.appcompat.app.AppCompatActivity;
-import com.example.myeatingmapdemo.MarkMyRestaurant.MarkMyRestaurantActivity;
+import com.example.myeatingmapdemo.CheckMyRestaurant.CheckMyRestaurantActivity;
 import com.skt.Tmap.TMapView;
 
 
@@ -47,7 +47,7 @@ public class MainActivity extends AppCompatActivity{
     markMyRestaurantBtn.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View v) {
-         Intent markMyRestaurantIntent = new Intent(getApplicationContext(), MarkMyRestaurantActivity.class);
+         Intent markMyRestaurantIntent = new Intent(getApplicationContext(), CheckMyRestaurantActivity.class);
          startActivity(markMyRestaurantIntent);
       }
     });

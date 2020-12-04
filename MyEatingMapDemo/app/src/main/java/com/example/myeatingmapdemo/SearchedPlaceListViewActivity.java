@@ -9,7 +9,7 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.example.myeatingmapdemo.FIndRestaurant.FindRestaurantMarkActivity;
-import com.example.myeatingmapdemo.MyEatingPlace.MyEatingPlaceMarkActivity;
+import com.example.myeatingmapdemo.MarkMyRestaurant.MarkRestaurantActivity;
 import com.example.myeatingmapdemo.Values.CurrentPlaceValues;
 import com.example.myeatingmapdemo.Values.ListPlaceValues;
 import com.skt.Tmap.TMapPoint;
@@ -74,7 +74,7 @@ public class SearchedPlaceListViewActivity extends AppCompatActivity {
 
     private void gotoMarkActivity(CurrentPlaceValues values) {
         Intent MarkIntent;
-        if(kind.equals("My")) MarkIntent = new Intent(getApplicationContext(), MyEatingPlaceMarkActivity.class);
+        if(kind.equals("My")) MarkIntent = new Intent(getApplicationContext(), MarkRestaurantActivity.class);
         else MarkIntent = new Intent(getApplicationContext(), FindRestaurantMarkActivity.class);
 
         MarkIntent.putExtra("values", values);

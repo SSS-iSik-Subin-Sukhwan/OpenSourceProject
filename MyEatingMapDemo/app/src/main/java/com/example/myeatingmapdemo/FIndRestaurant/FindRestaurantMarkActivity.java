@@ -38,16 +38,17 @@ public class FindRestaurantMarkActivity extends MarkActivity {
         Intent intent = getIntent();
         currentPlaceValues = (CurrentPlaceValues) intent.getSerializableExtra("values");
 
-        markerImage = BitmapFactory.decodeResource(this.getResources(), R.drawable.markerblack);
+        markerImage = BitmapFactory.decodeResource(this.getResources(), R.drawable.markerblack); // 중간지점의 마커로 사용할 이미지 지정
 
         LinearLayout linearLayoutTmap = (LinearLayout) findViewById(R.id.mapview);
         TMapView tMapView = new TMapView(this);
         linearLayoutTmap.addView(tMapView);
 
-        addMarkerItemToTmapView(markerImage, tMapView, currentPlaceValues.getPlacePoint());
+        addMarkerItemToTmapView(markerImage, tMapView, currentPlaceValues.getPlacePoint()); // 검색한 위치에 마커를 뜨게 하는 메소드
 
         setTextView(currentPlaceValues);
         setTmapView(currentPlaceValues);
+
         setYesBtn();
     }
 

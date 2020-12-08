@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.myeatingmapdemo.MarkMyRestaurant.MarkActivity;
@@ -25,6 +26,10 @@ public class FindRestaurantMarkActivity extends MarkActivity {
 
     Bitmap markerImage;
     Button yesBtn;
+    TMapView tMapView;
+    TextView addressTextView;
+    TextView nameTextView;
+
 
     CurrentPlaceValues currentPlaceValues;
     static ListPlaceValues listPlaceValues = new ListPlaceValues();
@@ -33,6 +38,12 @@ public class FindRestaurantMarkActivity extends MarkActivity {
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
+
+
+        addressTextView = (TextView) findViewById(R.id.nameOfAddress);
+        nameTextView = (TextView) findViewById(R.id.nameOfLocation);
+        tMapView = new TMapView(this);
+
         setContentView(R.layout.activity_find_restaurant_mark);
 
         Intent intent = getIntent();
@@ -41,13 +52,13 @@ public class FindRestaurantMarkActivity extends MarkActivity {
         markerImage = BitmapFactory.decodeResource(this.getResources(), R.drawable.markerblack); // 중간지점의 마커로 사용할 이미지 지정
 
         LinearLayout linearLayoutTmap = (LinearLayout) findViewById(R.id.mapview);
-        TMapView tMapView = new TMapView(this);
+        tMapView = new TMapView(this);
         linearLayoutTmap.addView(tMapView);
 
         addMarkerItemToTmapView(markerImage, tMapView, currentPlaceValues.getPlacePoint()); // 검색한 위치에 마커를 뜨게 하는 메소드
 
-        setTextView(currentPlaceValues);
-        setTmapView(currentPlaceValues);
+        setTextView(currentPlaceValues, addressTextView, nameTextView);
+        setTmapView(currentPlaceValues, tMapView);
 
         setYesBtn();
     }

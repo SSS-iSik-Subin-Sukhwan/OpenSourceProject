@@ -6,6 +6,7 @@ import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.example.myeatingmapdemo.Memo.MemoMyRestaurantActivity;
 import com.example.myeatingmapdemo.Values.CurrentPlaceValues;
@@ -15,6 +16,9 @@ import com.skt.Tmap.TMapView;
 public class MarkRestaurantActivity extends MarkActivity {
 
     TMapView tMapView;
+    TextView addressTextView;
+    TextView nameTextView;
+    // TMapView tMapView;
     Bitmap markerImage;
     Button yesBtn;
     CurrentPlaceValues currentPlaceValues;
@@ -22,6 +26,10 @@ public class MarkRestaurantActivity extends MarkActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        addressTextView = (TextView) findViewById(R.id.nameOfAddress);
+        nameTextView = (TextView) findViewById(R.id.nameOfLocation);
+        tMapView = new TMapView(this);
+
         setContentView(R.layout.activity_my_restaurant_mark);
 
         Intent intent = getIntent();
@@ -29,10 +37,9 @@ public class MarkRestaurantActivity extends MarkActivity {
         currentPlaceValues = (CurrentPlaceValues) intent.getSerializableExtra("values");
         markerImage = BitmapFactory.decodeResource(this.getResources(), R.drawable.markerblack); // 중간지점의 마커로 사용할 이미지 지정
 
-
         addMarkerItemToTmapView(markerImage, tMapView, currentPlaceValues.getPlacePoint()); // 검색한 위치에 마커를 뜨게 하는 메소드
-        setTextView(currentPlaceValues);
-        setTmapView(currentPlaceValues);
+        setTextView(currentPlaceValues, addressTextView, nameTextView);
+        setTmapView(currentPlaceValues, tMapView);
         setYesBtn();
     }
 

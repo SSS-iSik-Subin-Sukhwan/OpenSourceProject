@@ -14,21 +14,27 @@ import com.skt.Tmap.TMapView;
 
 public abstract class MarkActivity extends AppCompatActivity {
 
-    TMapView tMapView;
-    TextView addressTextView = (TextView) findViewById(R.id.nameOfAddress);
-    TextView nameTextView = (TextView) findViewById(R.id.nameOfLocation);
+    // TMapView tMapView;
+    // TextView addressTextView;
+    // TextView nameTextView;
+
+    //TextView addressTextView = (TextView) findViewById(R.id.nameOfAddress);
+    //TextView nameTextView = (TextView) findViewById(R.id.nameOfLocation);
 
     protected abstract void setYesBtn();
 
-    protected void setTextView(CurrentPlaceValues currentPlaceValues) {
+    protected void setTextView(CurrentPlaceValues currentPlaceValues, TextView addressTextView, TextView nameTextView) {
+
+        addressTextView = (TextView) findViewById(R.id.nameOfAddress);
+        nameTextView = (TextView) findViewById(R.id.nameOfLocation);
 
         nameTextView.setText(currentPlaceValues.getPlaceName());
         addressTextView.setText(currentPlaceValues.getPlaceAddress());
     }
 
-    protected void setTmapView(CurrentPlaceValues currentPlaceValues) {
+    protected void setTmapView(CurrentPlaceValues currentPlaceValues, TMapView tMapView) {
         LinearLayout linearLayoutTmap = (LinearLayout) findViewById(R.id.mapview);
-        tMapView = new TMapView(this);
+
         tMapView.setCenterPoint(currentPlaceValues.getPlacePoint().getLongitude(), currentPlaceValues.getPlacePoint().getLatitude());
         linearLayoutTmap.addView(tMapView);
     }

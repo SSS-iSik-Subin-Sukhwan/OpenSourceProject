@@ -1,4 +1,4 @@
-package com.example.myeatingmapdemo;
+package com.example.myeatingmapdemo.ListView;
 
 public class ListViewItem {
   private String POIStr;

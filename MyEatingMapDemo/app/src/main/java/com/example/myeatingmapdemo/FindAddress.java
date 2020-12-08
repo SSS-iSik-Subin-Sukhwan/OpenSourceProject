@@ -9,6 +9,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 import androidx.appcompat.app.AlertDialog;
 
+import com.example.myeatingmapdemo.ListView.SearchedPlaceListViewActivity;
 import com.example.myeatingmapdemo.Values.ListPlaceValues;
 import com.skt.Tmap.TMapData;
 import com.skt.Tmap.TMapPOIItem;

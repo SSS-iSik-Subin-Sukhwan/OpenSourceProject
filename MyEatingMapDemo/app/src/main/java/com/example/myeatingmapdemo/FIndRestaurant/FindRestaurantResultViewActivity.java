@@ -9,7 +9,7 @@ import android.widget.ListView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.myeatingmapdemo.ListViewAdapter;
+import com.example.myeatingmapdemo.ListView.ListViewAdapter;
 import com.example.myeatingmapdemo.R;
 import com.kakao.kakaolink.v2.KakaoLinkResponse;
 import com.kakao.kakaolink.v2.KakaoLinkService;

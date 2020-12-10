@@ -90,12 +90,12 @@ public class FindRestaurantResultViewActivity extends AppCompatActivity {
                       listPlaceValues.getPlaceFindPOILongitude(i));
 
               String[] kakaoAddress  = getKakaoAddress.split(" "); // 위도와 경도를 주소로 옮긴 값인 getKakaoAddress에 스페이스가 포함되어 있어 url에 데이터를 입력하면 페이지가 정상적으로 띄워지지않아서 스페이스를 뺀 주소를 제대로 얻어오기위한 String 배열을 생성.
-              String kakaoAddressResult = new String(); // 최종적으로 배열에 담긴 값을 반환받음
+              StringBuilder kakaoAddressResult = new StringBuilder(""); // 최종적으로 배열에 담긴 값을 반환받음
 
-              for(int i = 0; i < kakaoAddress.length; i++){
-                kakaoAddressResult += kakaoAddress[i]; // kakoAddress[i]에 닮긴 값들을 kakaoAddressResult에 옮겨담음
+              for (String address : kakaoAddress) {
+                kakaoAddressResult.append(address); // kakoAddress[i]에 닮긴 값들을 kakaoAddressResult에 옮겨담음
               }
-              createKakaotemplate(kakaoAddress[i],kakaoAddressResult,i);
+              createKakaotemplate(kakaoAddress[i], kakaoAddressResult.toString(),i);
               
             } catch (IOException e) {
               e.printStackTrace();

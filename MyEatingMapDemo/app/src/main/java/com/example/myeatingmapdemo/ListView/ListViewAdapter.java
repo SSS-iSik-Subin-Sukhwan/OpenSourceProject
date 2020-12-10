@@ -47,8 +47,8 @@ public class ListViewAdapter extends BaseAdapter {
   }
 
   private void getTextView(View convertView) {
-    POITextView = (TextView) convertView.findViewById(R.id.textView1);
-    AddressTextView = (TextView) convertView.findViewById(R.id.textView2);
+    POITextView = convertView.findViewById(R.id.textView1);
+    AddressTextView = convertView.findViewById(R.id.textView2);
   }
 
   private void setTextView(ListViewItem item) {

@@ -1,4 +1,4 @@
-package com.example.myeatingmapdemo.CheckMyRestaurant;
+package com.example.myeatingmapdemo.CheckRestaurant;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -24,7 +24,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 
-public class CheckMyRestaurantActivity extends AppCompatActivity {
+public class CheckRestaurantActivity extends AppCompatActivity {
     private static ArrayList<TMapPoint> userPointArr = new ArrayList<>();
     private static ArrayList<String> userMemoArr = new ArrayList<>();
     private static ArrayList<String> userLatArr = new ArrayList<>();
@@ -41,7 +41,7 @@ public class CheckMyRestaurantActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_check_my_eating_place);
 
-        LinearLayout linearLayoutTmap = (LinearLayout) findViewById(R.id.mapview);
+        LinearLayout linearLayoutTmap = findViewById(R.id.mapview);
         tMapView = new TMapView(this);
         linearLayoutTmap.addView(tMapView);
 
@@ -99,7 +99,7 @@ public class CheckMyRestaurantActivity extends AppCompatActivity {
             StringBuilder stringBuilder = new StringBuilder();
 
             while ((temp = bufferedReader.readLine()) != null) {
-                stringBuilder.append(temp + "\n");
+                stringBuilder.append(temp).append("\n");
             }
 
             bufferedReader.close();
@@ -134,7 +134,7 @@ public class CheckMyRestaurantActivity extends AppCompatActivity {
         }
 
         for (int k = 0; k < userMemoArr.size(); k++) {
-            TMapPoint mapPoint = new TMapPoint(Double.valueOf(userLatArr.get(k)), Double.valueOf(userLonArr.get(k)));
+            TMapPoint mapPoint = new TMapPoint(Double.parseDouble(userLatArr.get(k)), Double.parseDouble(userLonArr.get(k)));
             userPointArr.add(mapPoint);
         }
     }

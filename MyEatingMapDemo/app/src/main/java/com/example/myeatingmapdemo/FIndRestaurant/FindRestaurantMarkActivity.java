@@ -6,11 +6,10 @@ import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.myeatingmapdemo.MarkMyRestaurant.MarkActivity;
+import com.example.myeatingmapdemo.MarkRestaurant.MarkActivity;
 import com.example.myeatingmapdemo.Values.CurrentPlaceValues;
 import com.example.myeatingmapdemo.MainActivity;
 import com.example.myeatingmapdemo.R;
@@ -40,8 +39,8 @@ public class FindRestaurantMarkActivity extends MarkActivity {
         super.onCreate(savedInstanceState);
 
 
-        addressTextView = (TextView) findViewById(R.id.nameOfAddress);
-        nameTextView = (TextView) findViewById(R.id.nameOfLocation);
+        addressTextView = findViewById(R.id.nameOfAddress);
+        nameTextView = findViewById(R.id.nameOfLocation);
         tMapView = new TMapView(this);
 
         setContentView(R.layout.activity_find_restaurant_mark);
@@ -53,15 +52,15 @@ public class FindRestaurantMarkActivity extends MarkActivity {
 
         addMarkerItemToTmapView(markerImage, tMapView, currentPlaceValues.getPlacePoint()); // 검색한 위치에 마커를 뜨게 하는 메소드
 
-        setTextView(currentPlaceValues, addressTextView, nameTextView);
-        setTmapView(currentPlaceValues, tMapView);
+        setTextView(currentPlaceValues);
+        setTMapView(currentPlaceValues, tMapView);
 
         setYesBtn();
     }
 
     @Override
     protected void setYesBtn() {
-        yesBtn = (Button) findViewById(R.id.yesBtn);
+        yesBtn = findViewById(R.id.yesBtn);
 
         yesBtn.setOnClickListener(new Button.OnClickListener() {
             @Override

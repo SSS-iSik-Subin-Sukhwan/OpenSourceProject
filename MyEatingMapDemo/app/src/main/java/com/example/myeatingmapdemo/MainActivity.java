@@ -8,7 +8,7 @@ import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.myeatingmapdemo.CheckMyRestaurant.CheckMyRestaurantActivity;
+import com.example.myeatingmapdemo.CheckRestaurant.CheckRestaurantActivity;
 import com.skt.Tmap.TMapView;
 
 
@@ -26,9 +26,9 @@ public class MainActivity extends AppCompatActivity {
         TMapView tMapView = new TMapView(this);
         tMapView.setSKTMapApiKey("dd8c0503-c4c7-42fa-87ed-5a0bb98ea44c");
 
-        Button myEatingPlaceMemoBtn = (Button) findViewById(R.id.AddMyEatingPlaceBtn);
-        Button findEatingPlaceBtn = (Button) findViewById(R.id.FindEatingPlaceBtn);
-        Button markMyRestaurantBtn = (Button) findViewById(R.id.CheckMyEatingPlaceBtn);
+        Button myEatingPlaceMemoBtn = findViewById(R.id.AddMyEatingPlaceBtn);
+        Button findEatingPlaceBtn = findViewById(R.id.FindEatingPlaceBtn);
+        Button markMyRestaurantBtn = findViewById(R.id.CheckMyEatingPlaceBtn);
 
         myEatingPlaceMemoBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -49,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
         markMyRestaurantBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent markMyRestaurantIntent = new Intent(getApplicationContext(), CheckMyRestaurantActivity.class);
+                Intent markMyRestaurantIntent = new Intent(getApplicationContext(), CheckRestaurantActivity.class);
                 startActivity(markMyRestaurantIntent);
             }
         });

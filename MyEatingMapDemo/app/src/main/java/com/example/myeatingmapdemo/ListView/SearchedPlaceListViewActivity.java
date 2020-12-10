@@ -9,7 +9,7 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.example.myeatingmapdemo.FIndRestaurant.FindRestaurantMarkActivity;
-import com.example.myeatingmapdemo.MarkMyRestaurant.MarkRestaurantActivity;
+import com.example.myeatingmapdemo.MarkRestaurant.MarkRestaurantActivity;
 import com.example.myeatingmapdemo.R;
 import com.example.myeatingmapdemo.Values.CurrentPlaceValues;
 import com.example.myeatingmapdemo.Values.ListPlaceValues;

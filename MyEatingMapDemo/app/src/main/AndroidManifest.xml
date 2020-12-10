@@ -13,12 +13,12 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
 
-        <activity android:name=".CheckMyRestaurant.PopUpActivity" android:theme="@android:style/Theme.Dialog" />
+        <activity android:name=".CheckRestaurant.PopUpActivity" android:theme="@android:style/Theme.Dialog" />
 
-        <activity android:name=".CheckMyRestaurant.CheckMyRestaurantActivity" />
+        <activity android:name=".CheckRestaurant.CheckRestaurantActivity" />
         <activity android:name=".FIndRestaurant.FindRestaurantResultViewActivity" />
-        <activity android:name=".Memo.MemoMyRestaurantActivity" />
-        <activity android:name=".MarkMyRestaurant.MarkRestaurantActivity" />
+        <activity android:name=".Memo.MemoRestaurantActivity" />
+        <activity android:name=".MarkRestaurant.MarkRestaurantActivity" />
         <activity android:name=".FIndRestaurant.FindRestaurantMarkActivity" />
         <activity android:name=".ListView.SearchedPlaceListViewActivity" />
         <activity android:name=".MainActivity">

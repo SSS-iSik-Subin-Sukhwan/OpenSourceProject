@@ -20,7 +20,7 @@ import com.example.myeatingmapdemo.R;
 
 import org.json.JSONObject;
 
-public class MemoMyRestaurantActivity extends AppCompatActivity {
+public class MemoRestaurantActivity extends AppCompatActivity {
   
   private Response.Listener<String> responseListener;
   private AlertDialog dialog;
@@ -66,7 +66,7 @@ public class MemoMyRestaurantActivity extends AppCompatActivity {
     return registerMemo;
   }
   private void sendDataToServerUsingRequestQueue(RegisterMemo memo) {
-    RequestQueue registerQueue = Volley.newRequestQueue(MemoMyRestaurantActivity.this);
+    RequestQueue registerQueue = Volley.newRequestQueue(MemoRestaurantActivity.this);
     registerQueue.add(memo);
   }
   private void makeResponseListenerUsingDialog() {
@@ -85,7 +85,7 @@ public class MemoMyRestaurantActivity extends AppCompatActivity {
   }
   private void makeDialog(boolean isSuccess) {
     if (isSuccess) {
-      AlertDialog.Builder builder = new AlertDialog.Builder(MemoMyRestaurantActivity.this);
+      AlertDialog.Builder builder = new AlertDialog.Builder(MemoRestaurantActivity.this);
       dialog = builder.setMessage("메모를 저장하시겠습니까?")
               .setPositiveButton("확인", new DialogInterface.OnClickListener() {
                 @Override

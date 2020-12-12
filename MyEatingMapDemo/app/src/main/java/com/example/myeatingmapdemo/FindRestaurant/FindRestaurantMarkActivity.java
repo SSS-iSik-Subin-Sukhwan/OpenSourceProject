@@ -1,4 +1,4 @@
-package com.example.myeatingmapdemo.FIndRestaurant;
+package com.example.myeatingmapdemo.FindRestaurant;
 
 import android.content.Intent;
 import android.graphics.Bitmap;

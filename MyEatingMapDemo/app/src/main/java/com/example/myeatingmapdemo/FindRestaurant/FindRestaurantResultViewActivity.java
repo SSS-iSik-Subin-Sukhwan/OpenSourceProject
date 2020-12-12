@@ -1,4 +1,4 @@
-package com.example.myeatingmapdemo.FIndRestaurant;
+package com.example.myeatingmapdemo.FindRestaurant;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -30,7 +30,7 @@ import java.util.Map;
 
 import javax.xml.parsers.ParserConfigurationException;
 
-import static com.example.myeatingmapdemo.FIndRestaurant.FindRestaurantMarkActivity.listPlaceValues;
+import static com.example.myeatingmapdemo.FindRestaurant.FindRestaurantMarkActivity.listPlaceValues;
 
 public class FindRestaurantResultViewActivity extends AppCompatActivity {
   boolean updateListview = false;

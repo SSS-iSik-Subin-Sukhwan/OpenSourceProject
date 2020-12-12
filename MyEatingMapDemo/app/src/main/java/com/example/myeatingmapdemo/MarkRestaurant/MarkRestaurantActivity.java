@@ -16,8 +16,6 @@ import com.skt.Tmap.TMapView;
 public class MarkRestaurantActivity extends MarkActivity {
 
     TMapView tMapView;
-    TextView addressTextView;
-    TextView nameTextView;
     Bitmap markerImage;
     Button yesBtn;
     CurrentPlaceValues currentPlaceValues;

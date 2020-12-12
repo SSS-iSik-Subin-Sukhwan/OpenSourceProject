@@ -26,9 +26,6 @@ public class FindRestaurantMarkActivity extends MarkActivity {
     Bitmap markerImage;
     Button yesBtn;
     TMapView tMapView;
-    TextView addressTextView;
-    TextView nameTextView;
-
 
     CurrentPlaceValues currentPlaceValues;
     static ListPlaceValues listPlaceValues = new ListPlaceValues();

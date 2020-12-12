@@ -26,8 +26,6 @@ public class MarkRestaurantActivity extends MarkActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        addressTextView = findViewById(R.id.nameOfAddress);
-        nameTextView = findViewById(R.id.nameOfLocation);
         tMapView = new TMapView(this);
 
         setContentView(R.layout.activity_my_restaurant_mark);
